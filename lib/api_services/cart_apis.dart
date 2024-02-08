@@ -21,12 +21,16 @@ class CartAPIs {
         //Maintain the cart in the local storage.
         print("user not logged in");
         var value_cart = await storage.read(key: 'local_cart');
-        if (value_cart != null) {
+        if (value_cart == null) {
           var empty_cart_json = json.decode(
               '{"coupons":[],"shipping_rates":[],"shipping_address":{"first_name":"","last_name":"","company":"","address_1":"","address_2":"","city":"","state":"","postcode":"","country":"","phone":""},"billing_address":{"first_name":"","last_name":"","company":"","address_1":"","address_2":"","city":"","state":"","postcode":"","country":"","email":"","phone":""},"items":[],"items_count":0,"items_weight":0,"cross_sells":[],"needs_payment":false,"needs_shipping":false,"has_calculated_shipping":false,"fees":[],"totals":{"total_items":"0","total_items_tax":"0","total_fees":"0","total_fees_tax":"0","total_discount":"0","total_discount_tax":"0","total_shipping":null,"total_shipping_tax":null,"total_price":"0","total_tax":"0","tax_lines":[],"currency_code":"LKR","currency_symbol":"Rs. ","currency_minor_unit":2,"currency_decimal_separator":".","currency_thousand_separator":",","currency_prefix":"Rs. ","currency_suffix":""},"errors":[],"payment_requirements":["products"],"extensions":{}}');
           Cart cart = Cart.fromJson(empty_cart_json);
           return cart;
-        } else {}
+        } else {
+          var cart_json = json.decode(value_cart);
+          Cart cart = Cart.fromJson(cart_json);
+          return cart;
+        }
       } else {
         print("Loading the cart of logged in user");
         //The user has logged in. This is authorized checkout mode.
@@ -90,29 +94,19 @@ class CartAPIs {
     }
   }
 
-  Future<bool> addItem(product_id, quantity) async {
+  Future<bool> addItem(cart_item) async {
     try {
       final storage = FlutterSecureStorage();
-      var value_ba = await storage.read(key: 'auth_header');
-      if (value_ba == null) {
-        //The user hasn't logged in. This is guest checkout mode.
-        //Maintain the cart in the local storage.
-        print("user not logged in");
-        var value_cart = await storage.read(key: 'local_cart');
-        if (value_cart != null) {
+            var value_ba = await storage.read(key: 'auth_header');
 
-        } else {
-
-        }
-      } else {
         print("user is logged in");
         String? nonce = await storage.read(key: 'cart_nonce');
 
         final Uri url = Uri.parse(base_url + '/cart/add-item');
 
         Map<String, dynamic> postData = {
-          'id': product_id, //16652, // Replace with your actual ID
-          'quantity': quantity //1, // Replace with your actual quantity
+          'id': cart_item.product_id, //16652, // Replace with your actual ID
+          'quantity': cart_item.quantity //1, // Replace with your actual quantity
         };
 
         String encodedData = json.encode(postData);
@@ -121,7 +115,7 @@ class CartAPIs {
           url,
           headers: {
             "Content-Type": "application/json",
-            "Authorization": value_ba,
+            "Authorization": value_ba as String,
             'nonce': nonce as String, // Add your nonce here
           },
           body: encodedData,
@@ -133,7 +127,6 @@ class CartAPIs {
         } else {
           print('Failed to cart info: ${response.statusCode}');
         }
-      }
     } catch (e, stackTrace) {
       print('Error fetching cart: $e');
       print('Stack trace: $stackTrace');
@@ -154,10 +147,11 @@ class CartAPIs {
     final storage = FlutterSecureStorage();
 
     String? basicAuth = await storage.read(key: 'auth_header');
-    String? nonce = await storage.read(key: 'nonce');
+
+    if(basicAuth!=null){
+    String? nonce = await storage.read(key: 'cart_nonce');
 
     final encoded_body = jsonEncode(data);
-
     try {
       final Uri url = Uri.parse(
           'https://catlitter.lk/wp-json/wc/store' + '/cart/items/' + key);
@@ -178,17 +172,35 @@ class CartAPIs {
     } catch (ex) {
       return false;
     }
+    }else{
+        final storage = FlutterSecureStorage();
+        var value_cart = await storage.read(key: 'local_cart');
+        var cart_json = json.decode(value_cart as String);
+        Cart cart = Cart.fromJson(cart_json);
+           if (cart.line_items.where((element) => element.key == key).length == 1){  
+              CartItem update_item = cart.line_items.where((element) => element.key == key).first;
+              int update_index = cart.line_items.indexOf(update_item);
+              update_item.quantity =  quantity;
+              cart.line_items.setAll(update_index, [update_item]);
+               await storage.write(
+      key: 'local_cart', value: json.encode(cart.toJson()));
+              return true;
+} else {
+  print("No matching items in cart");
+  return false;
+}  }
   }
 
   static Future<bool> deleteCartItemByKey({required String key}) async {
     final storage = FlutterSecureStorage();
 
     String? basicAuth = await storage.read(key: 'auth_header');
-    String? nonce = await storage.read(key: 'nonce');
+    String? nonce = await storage.read(key: 'cart_nonce');
 
+
+  if(basicAuth != null){
     try {
-      final Uri url = Uri.parse(
-          'https://catlitter.lk/wp-json/wc/store' + '/cart/items/' + key);
+      final Uri url = Uri.parse('https://catlitter.lk/wp-json/wc/store' + '/cart/items/' + key);
 
       final response = await http.delete(
         url,
@@ -204,10 +216,25 @@ class CartAPIs {
       } else {
         return false;
       }
-    } catch (ex) {
+    } catch (ex, stackTrace) {
       return false;
     }
+  }else{
+      final storage = FlutterSecureStorage();
+      var value_cart = await storage.read(key: 'local_cart');
+      Cart cart = Cart.fromJson(json.decode(value_cart as String));
+ if (cart.line_items.where((element) => element.key ==key).length == 1){  
+  CartItem update_item = cart.line_items.where((element) => element.key == key).first;
+  int update_index = cart.line_items.indexOf(update_item);
+  cart.line_items.removeAt(update_index);
+  var value_cart = await storage.write(key: 'local_cart', value: json.encode(cart.toJson()));
+  return true;
+} else {
+  print("No matching items in cart");
+}  }
+    return true;
   }
+  
 
   Future<bool> createOrder(Cart? cart) async {
     try {
@@ -245,7 +272,7 @@ class CartAPIs {
 
   static Future<String?> getCartNonceFromStorage() async {
     final storage = FlutterSecureStorage();
-    String? userStr = await storage.read(key: 'nonce');
+    String? userStr = await storage.read(key: 'cart_nonce');
     return userStr;
   }
 
@@ -266,7 +293,7 @@ class CartAPIs {
         print("Loading the cart of logged in user");
         //The user has logged in. This is authorized checkout mode.
         String basicAuth = value_ba;
-        String nonce = await storage.read(key: 'nonce') as String;
+        String nonce = await storage.read(key: 'cart_nonce') as String;
         // String cart_nonce = await storage.read(key: 'cart_nonce') as String;
 
         final response = await http.delete(

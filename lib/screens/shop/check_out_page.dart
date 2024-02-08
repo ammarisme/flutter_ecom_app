@@ -6,7 +6,7 @@ import 'package:ecommerce_int2/models/cart.dart';
 import 'package:ecommerce_int2/screens/address/add_address_page.dart';
 import 'package:ecommerce_int2/screens/components/ui_components.dart';
 import 'package:ecommerce_int2/screens/main/main_page.dart';
-import 'package:ecommerce_int2/screens/payment/unpaid_page.dart';
+// import 'package:ecommerce_int2/screens/payment/unpaid_page.dart';
 import 'package:ecommerce_int2/screens/shop/components/shop_item_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -169,11 +169,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 elevation: 0.0,
                 iconTheme: IconThemeData(color: THEME_COLOR_1),
                 actions: <Widget>[
-                  IconButton(
-                    icon: Image.asset('assets/icons/denied_wallet.png'),
-                    onPressed: () => Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) => UnpaidPage())),
-                  )
+                  // IconButton(
+                  //   icon: Image.asset('assets/icons/denied_wallet.png'),
+                  //   onPressed: () => Navigator.of(context)
+                  //       .push(MaterialPageRoute(builder: (_) => UnpaidPage())),
+                  // )
                 ],
                 title: Text(
                   'My Cart',

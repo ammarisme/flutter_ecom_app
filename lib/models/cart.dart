@@ -2,7 +2,7 @@ import 'package:ecommerce_int2/models/product.dart';
 import 'package:ecommerce_int2/models/user.dart';
 
 class Cart {
- //for json output
+  //for json output
   Address billing;
   Address shipping;
   bool set_paid;
@@ -15,41 +15,61 @@ class Cart {
   String nonce;
   User? user;
 
-  Cart(
-      {
-      //for json out
-      required this.payment_method,
-      required this.payment_method_title,
-      required this.set_paid,
-      required this.billing,
-      required this.shipping,
-      required this.line_items,
-      required this.shipping_lines,
+  Cart({
+    //for json out
+    required this.payment_method,
+    required this.payment_method_title,
+    required this.set_paid,
+    required this.billing,
+    required this.shipping,
+    required this.line_items,
+    required this.shipping_lines,
 
-      //json input
-      itemsCount,
-      itemsWeight,
-      crossSells,
-      needsPayment,
-      needsShipping,
-      hasCalculatedShipping,
-      fees,
-      totals,
-      errors,
-      required this.nonce,
-      required List<dynamic> coupons,
-      shippingRates,
-      required List<String> paymentRequirements,
-      required Map<String, dynamic> extensions,
-      });
+    //json input
+    itemsCount,
+    itemsWeight,
+    crossSells,
+    needsPayment,
+    needsShipping,
+    hasCalculatedShipping,
+    fees,
+    totals,
+    errors,
+    required this.nonce,
+    required List<dynamic> coupons,
+    shippingRates,
+    required List<String> paymentRequirements,
+    required Map<String, dynamic> extensions,
+  });
 
   factory Cart.fromJson(Map<String, dynamic> json) {
-    List<CartItem> items = (json['items'] as List<dynamic>)
-        .map((item) => CartItem.fromJson(item))
-        .toList();
+    List<CartItem> items = [];
+    try {
+      items = json['items'] != null
+          ? (json['items'] as List<dynamic>)
+              .map((item) => CartItem.fromJson(item))
+              .toList()
+          : [];
+      if(items.length ==0){
+items =  json['line_items'] != null
+          ? (json['line_items'] as List<dynamic>)
+              .map((item) => CartItem.fromJson(item))
+              .toList()
+          : [];
+      }
+      
+    } catch (ex) {
+      print(ex);
+    }
 
+    Map<String, dynamic> extension = {};
+    try {
+      extension = json["extensions"] != null ? json["extensions"] : [];
+    } catch (ex) {
+      extension = {};
+    }
     return Cart(
-      //for json out
+        //for json out
         payment_method: 'cash',
         payment_method_title: 'Cash',
         set_paid: false,
@@ -58,7 +78,7 @@ class Cart {
         billing: Address.fromJson(json['billing_address'] ?? {}),
         line_items: items ?? [],
 
-      //json in
+        //json in
         coupons: json['coupons'] ?? [],
         shippingRates: json['shipping_rates'] ?? [],
         itemsCount: json['items_count'] ?? 0,
@@ -73,15 +93,14 @@ class Cart {
         paymentRequirements:
             List<String>.from(json['payment_requirements'] ?? []),
         nonce: "", //to update the cart
-        extensions: json["extensions"]
+        extensions: extension
         // extensions: json['extensions'] ?? {},
         );
   }
 
-
   Map<String, dynamic> toJson() {
-
-    List<Map<String, dynamic>> lineItemsJson = line_items.map((item) => item.toJson()).toList();
+    List<Map<String, dynamic>> lineItemsJson =
+        line_items.map((item) => item.toJson()).toList();
 
     return {
       'payment_method': this.payment_method,
@@ -90,21 +109,37 @@ class Cart {
       'billing': this.billing.toJson(),
       'shipping': this.shipping.toJson(),
       'line_items': lineItemsJson,
-      'customer_id' : this.user!.id,
-      'shipping_lines' : "",//this.shipping_lines,
+      'customer_id': this.user != null ? this.user!.id : "",
+      'shipping_lines': "", //this.shipping_lines,
     };
   }
 
+  addItem(carItem) {
+    this.line_items.add(carItem);
+  }
 
+   updateItem(Cart cart, CartItem cart_item) {
+ if (cart.line_items.where((element) => element.product_id == cart_item.product_id).length == 1){  
+  CartItem update_item = cart.line_items.where((element) => element.product_id == cart_item.product_id).first;
+  int update_index = cart.line_items.indexOf(update_item);
+  update_item.quantity =update_item.quantity +  cart_item.quantity;
+  cart.line_items.setAll(update_index, [update_item]);
+
+  return cart;
+} else {
+  print("No matching items in cart");
+}  }
 }
-
 
 class ShippingLine {
   final String method_id;
   final String method_title;
   final double total;
 
-  ShippingLine({required this.method_id, required this.method_title, required this.total});
+  ShippingLine(
+      {required this.method_id,
+      required this.method_title,
+      required this.total});
 }
 
 class Address {
@@ -158,17 +193,14 @@ class Address {
       'address1': this.address1,
       'address2': this.address2,
       'city': this.city,
-      'state' :this.state,
-
+      'state': this.state,
       'postcode': this.postcode,
       'country': this.country,
       'email': this.email,
       'phone': this.phone,
     };
   }
-
 }
-
 
 class Totals {
   String totalItems;
@@ -238,7 +270,7 @@ class Totals {
 class CartItem {
   final String key;
   final int product_id;
-  late  int quantity;
+  late int quantity;
   final String name;
   late final double regularPrice;
   late final double salePrice;
@@ -270,20 +302,50 @@ class CartItem {
       required this.variations});
 
   factory CartItem.fromJson(Map<String, dynamic> json) {
+    double regular_price = 0;
+    if (json["regularPrice"] != null && json["regularPrice"] != "") {
+      regular_price = json['regularPrice'];
+    } else {
+      regular_price =
+          double.tryParse(json['prices']['regular_price'])! / 100 ?? 0.00;
+    }
+
+    double sale_price = 0;
+    if (json["salePrice"] != null && json["salePrice"] != "") {
+      sale_price = json['salePrice'];
+    } else {
+      sale_price =
+          double.tryParse(json['prices']['sale_price'])! / 100 ?? 0.00;
+    }
+    
+    if(sale_price==0){
+      sale_price = regular_price;
+    }
+
+
     return CartItem(
         key: json['key'] ?? '',
-        product_id: json['id'] ?? 0,
+        product_id: json['product_id']!="" && json['product_id']!=null ? int.parse(json['product_id']) : (json['id'] ?? 0),
         quantity: json['quantity'] ?? 0,
         name: json['name'] ?? '',
         // lowStockRemaining: json['low_stock_remaining'],
-        regularPrice:
-            double.tryParse(json['prices']['regular_price'])! / 100 ?? 0.00,
-        salePrice: double.tryParse(json['prices']['sale_price'])! / 100 ?? 0.00,
-        currencyCode: json['totals']['currency_code'] ?? '',
-        currencySymbol: json['totals']['currency_symbol'] ?? '',
-        lineTotalTax: json['totals']['line_total_tax'] ?? '',
-        currencyMinorUnit: json['totals']['currency_minor_unit'] ?? 0,
-        currencyPrefix: json['totals']['currency_prefix'] ?? '',
+        regularPrice: regular_price,
+        salePrice: sale_price,
+        currencyCode: json['currencyCode'] != null && json['currencyCode'] != ""
+            ? json['currencyCode']
+            : (json['totals']['currency_code'] ?? ''),
+        lineTotalTax: json['lineTotalTax'] != null && json['lineTotalTax'] != ""
+            ? json['lineTotalTax']
+            : (json['totals']['line_total_tax'] ?? ''),
+        currencyMinorUnit: json['currencyMinorUnit'] != null && json['currencyMinorUnit'] != ""
+            ? json['currencyMinorUnit']
+            : (json['totals']['currency_minor_unit'] ?? ''),
+        currencyPrefix: json['currencyPrefix'] != null && json['currencyPrefix'] != ""
+            ? json['currencyPrefix']
+            : (json['totals']['currency_prefix'] ?? ''),
+        currencySymbol: json['currencySymbol'] != null && json['currencySymbol'] != ""
+            ? json['currencySymbol']
+            : (json['totals']['currency_symbol'] ?? ''),
         linetotal: 0,
         linediscount: 0,
         variations: json['variations'] != null ? json['variations'] : []);
@@ -292,7 +354,7 @@ class CartItem {
   Map<String, dynamic> toJson() {
     return {
       'key': key,
-      'product_id': product_id,
+      'product_id': product_id ==0 ? key : product_id,
       'quantity': quantity,
       'name': name,
       // 'lowStockRemaining': lowStockRemaining,
@@ -303,7 +365,7 @@ class CartItem {
       'lineTotalTax': lineTotalTax,
       'currencyMinorUnit': currencyMinorUnit,
       'currencyPrefix': currencyPrefix,
-      'linetotal': linetotal,
+      'linetotal': salePrice*quantity,
       'linediscount': linediscount,
     };
   }

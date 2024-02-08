@@ -126,7 +126,7 @@ class _ProductOptionState extends State<ProductOption> {
                             "Adding ${1} ${widget.product.name} to your cart.",
                             ToastType.done_success);
                         cartNotifier
-                            .addItem(getSelectedProductId(), 1)
+                            .addItem(widget.product, 1 )
                             .then((value) {
                           Utils.showToast(
                               "Successfully added ${1} ${widget.product.name} to your cart.",
@@ -712,7 +712,7 @@ class _ProductOptionState extends State<ProductOption> {
                                         ToastType.done_success);
                                     cartNotifier
                                         .addItem(
-                                            getSelectedProductId(), quantity)
+                                            widget.product, quantity)
                                         .then((value) {
                                       Utils.showToast(
                                           "Successfully added ${quantity} ${widget.product.name} to your cart.",

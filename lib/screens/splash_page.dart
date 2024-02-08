@@ -38,9 +38,9 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
 
-    if (DateTime.now().isAfter(expirationDate)) {
-      return;
-    }
+    // if (DateTime.now().isAfter(expirationDate)) {
+    //   return;
+    // }
 
     checkConnectivity().then((value) {
       if(value== false){
@@ -106,9 +106,9 @@ class _SplashScreenState extends State<SplashScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (DateTime.now().isAfter(expirationDate)) {
-      return;
-    }
+    // if (DateTime.now().isAfter(expirationDate)) {
+    //   return;
+    // }
 
      if (_connectivityResult != ConnectivityResult.none) {
       // No internet connection, show an alert or message to the user

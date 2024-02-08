@@ -86,6 +86,7 @@ class _ShopItemListState extends State<ShopItemList> {
                                                           "Removing ${widget.cart_item.product!.name} from your cart.",
                                                           ToastType
                                                               .done_success);
+
                                                           CartAPIs.deleteCartItemByKey(
                                                                   key: widget.cart_item.key)
                                                               .then((updated) {

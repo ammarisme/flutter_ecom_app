@@ -327,6 +327,8 @@ class _AddAddressFormState extends State<AddAddressForm> {
                             cartNotifier.addCustomer(this.user);
                             UserAPIs.updateCustomer(this.user as User)
                                 .then((value) {
+                                  cartNotifier.updateBillingInfo(this.user);
+                                            cartNotifier.updateShippingInfo(this.user);
                               Utils.showToast("Updated customer info!",
                                   ToastType.done_success);
                               Navigator.of(context).push(MaterialPageRoute(
@@ -352,6 +354,9 @@ class _AddAddressFormState extends State<AddAddressForm> {
                                                     context,
                                                     listen: false);
                                             cartNotifier.addCustomer(this.user);
+                                            cartNotifier.updateBillingInfo(this.user);
+                                            cartNotifier.updateShippingInfo(this.user);
+                                          
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
