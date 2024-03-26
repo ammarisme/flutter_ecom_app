@@ -40,4 +40,8 @@ class Utils {
       textColor: type == ToastType.done_error ? Colors.red : Colors.white,
     );
   }
+
+  static log(String msg){
+
+  }
 }

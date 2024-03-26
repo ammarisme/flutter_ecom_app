@@ -26,3 +26,5 @@ class Location {
 
   Map<String, dynamic> toJson() => _$LocationToJson(this);
 }
+
+

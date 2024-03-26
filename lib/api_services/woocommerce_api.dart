@@ -1,8 +1,8 @@
 import 'package:flutter_wp_woocommerce/woocommerce.dart';
 
 class WoocommerceAPI {
-  static final String WRITE_API_KEY = 'ck_4e8b0b1c120f3705b6fb2439ac21f0395ff28cba';
-  static final String WRITE_API_SECRET = "cs_7776fe061b9ea6853d41ab3b1f39201ae3e9e0ab";
+  static final String WRITE_API_KEY = 'ck_b7e55e17cce8d13b050c82e7b85fdef8935a3ac7';
+  static final String WRITE_API_SECRET = "cs_94fcd8419be83fe3afc0cee2f8dc610ee0a535f2";
   static final String BASE_URL = "https://catlitter.lk";
   
   static WooCommerce woocommerce = WooCommerce(
