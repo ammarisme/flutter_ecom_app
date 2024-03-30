@@ -47,7 +47,7 @@ Widget build(BuildContext context) {
       unselectedLabelStyle: TextStyle(
         fontSize: 14.0,
       ),
-      labelColor: darkGrey,
+      labelColor: AppSettings.darkGrey,
       unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
       isScrollable: true,
       controller: this.tabController,

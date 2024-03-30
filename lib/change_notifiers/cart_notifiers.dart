@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:ecommerce_int2/api_services/cart_apis.dart';
+import 'package:ecommerce_int2/api_services/order_apis.dart';
 import 'package:ecommerce_int2/api_services/shipping.dart';
 import 'package:ecommerce_int2/models/product.dart';
 import 'package:ecommerce_int2/models/user.dart';
@@ -18,6 +19,7 @@ class CartNotifier extends ChangeNotifier {
   //line items and discounts
   double totalLineDiscounts = 0;
   double totalBeforeDiscounts = 0;
+  double bill_amount = 0;
   double discountOnTotal = 0;
   double total = 0;
 
@@ -53,44 +55,53 @@ class CartNotifier extends ChangeNotifier {
   }
   //Calculates all order related numbers
   void calculateOrderInfo(user) {
-    this.totalLineDiscounts = 0;
-    this.totalBeforeDiscounts = 0;
-
-    // Calculate total line discounts and total before discounts
-    for (var item in cart!.line_items) {
-      double lineTotal = item.quantity * item.salePrice;
-      print(item.quantity);
-      totalBeforeDiscounts += lineTotal;
-
-      double discountAmount = (item.linediscount / 100) * lineTotal;
-      totalLineDiscounts += discountAmount;
-    }
-
-
-    // payment method discounts
-    this.discountOnTotal = (totalBeforeDiscounts - totalLineDiscounts) *
-        (payment_method_discount_percentage / 100);
-
-    if(this.shipping_method_id!="sp"){
-    double totalWeight = this.cart!.line_items.fold(
-        0.0,
-        (sum, lineItem) =>
-            sum + (double.parse(lineItem.product!.weight) * lineItem.quantity));
-    totalWeight = double.parse(totalWeight.toStringAsFixed(0));
-      this.shipping_charges = shipping_cal.getShippingCost(user!.shipping_info.city,
-          user!.shipping_info.state, totalWeight);
-      this.total =
-          (totalBeforeDiscounts - totalLineDiscounts) - discountOnTotal;
-      this.total += this.shipping_charges;
-    }else{
-       this.shipping_charges = 0;
-      this.total =
-          (totalBeforeDiscounts - totalLineDiscounts) - discountOnTotal;
-      this.total += this.shipping_charges;
-
-    }
+    OrderAPIs.calculateOrderInfo(this.cart).then((result) {
+      if (result.status) {
+        this.totalLineDiscounts = double.tryParse(result.result["response"]["response"]["totalLineDiscounts"]) as double;
+        this.totalBeforeDiscounts = double.tryParse(result.result["response"]["response"]["totalBeforeDiscounts"])  as double;
+        this.discountOnTotal = double.tryParse(result.result["response"]["response"]["discountOnTotal"]) as double;
+        this.shipping_charges = double.tryParse(result.result["response"]["response"]["shipping_charges"]) as double;
+        this.total = double.tryParse(result.result["response"]["response"]["total"]) as double;
+        this.bill_amount = double.tryParse(result.result["response"]["response"]["billAmount"]) as double;
+        notifyListeners();
+      }
+    });
     
-      notifyListeners();
+
+    // // Calculate total line discounts and total before discounts
+    // for (var item in cart!.line_items) {
+    //   double lineTotal = item.quantity * item.salePrice;
+    //   print(item.quantity);
+    //   totalBeforeDiscounts += lineTotal;
+
+    //   double discountAmount = (item.linediscount / 100) * lineTotal;
+    //   totalLineDiscounts += discountAmount;
+    // }
+
+
+    // // payment method discounts
+    // this.discountOnTotal = (totalBeforeDiscounts - totalLineDiscounts) *
+    //     (payment_method_discount_percentage / 100);
+
+    // if(this.shipping_method_id!="sp"){
+    // double totalWeight = this.cart!.line_items.fold(
+    //     0.0,
+    //     (sum, lineItem) =>
+    //         sum + (double.parse(lineItem.product!.weight) * lineItem.quantity));
+    // totalWeight = double.parse(totalWeight.toStringAsFixed(0));
+    //   this.shipping_charges = shipping_cal.getShippingCost(user!.shipping_info.city,
+    //       user!.shipping_info.state, totalWeight);
+    //   this.total =
+    //       (totalBeforeDiscounts - totalLineDiscounts) - discountOnTotal;
+    //   this.total += this.shipping_charges;
+    // }else{
+    //    this.shipping_charges = 0;
+    //   this.total =
+    //       (totalBeforeDiscounts - totalLineDiscounts) - discountOnTotal;
+    //   this.total += this.shipping_charges;
+
+    // }
+    
 
     
   }
@@ -111,7 +122,8 @@ class CartNotifier extends ChangeNotifier {
   Future<Cart?> getCart() async {
     print("cart fetched");
     this.shipping_cal.loadJson();
-    return CartAPIs.getCart();
+    var cart =await CartAPIs.getCart();
+    return cart;
   }
 
   Future<void> addItem(Product product, quantity) async {
@@ -298,11 +310,6 @@ class CartNotifier extends ChangeNotifier {
   void updateShippingMethod(user, shipping_method) {
     this.cart!.user = user;
     this.shipping_method_id = shipping_method;
-    if(shipping_method == "sp"){
-      this.shipping_charges = 0;
-      calculateOrderInfo(user);
-      return;
-    }
     this.calculateOrderInfo(user);
     return;
   }

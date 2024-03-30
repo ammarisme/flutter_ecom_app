@@ -36,7 +36,7 @@ class ProductList extends StatelessWidget {
               print(
                   "The itemCount is too big, we suggest use FractionPaginationBuilder instead of DotSwiperPaginationBuilder in this sitituation");
             }
-            Color activeColor = THEME_COLOR_1;
+            Color activeColor = AppSettings.THEME_COLOR_1  as Color;
             Color color = Colors.grey.withOpacity(.3);
             double size = 10.0;
             double space = 5.0;
@@ -59,6 +59,7 @@ class ProductList extends StatelessWidget {
             int itemCount = config.itemCount;
             int activeIndex = config.activeIndex;
 
+            if (itemCount < 11){
             for (int i = 0; i < itemCount; ++i) {
               bool active = i == activeIndex;
               dots.add(Container(
@@ -76,7 +77,7 @@ class ProductList extends StatelessWidget {
                 ),
               ));
             }
-
+            }
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Align(
@@ -124,7 +125,7 @@ class ProductCard extends StatelessWidget {
             width: width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(24)),
-              color: THEME_COLOR_1,
+              color: AppSettings.THEME_COLOR_1,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -206,7 +207,7 @@ class ProductCard extends StatelessWidget {
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               bottomLeft: Radius.circular(10)),
-                          color: PRICE_COLOR_SALE.withOpacity(0.7),
+                          color: (AppSettings.PRICE_COLOR_SALE as Color).withOpacity(0.7),
                         ),
                         child:
                          Text(

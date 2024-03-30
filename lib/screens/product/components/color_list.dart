@@ -25,7 +25,7 @@ class _ColorListState extends State<ColorList> {
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
               'Color',
-              style: TextStyle(color: Colors.white, shadows: shadow),
+              style: TextStyle(color: Colors.white, shadows: AppSettings.shadow),
             ),
           ),
           Flexible(
@@ -78,7 +78,7 @@ class ColorOption extends StatelessWidget {
       Text(
         '1 kg',
         style: const TextStyle(
-            color: darkGrey,
+            color: AppSettings.darkGrey,
             fontWeight: FontWeight.w500,
             fontFamily: "Montserrat",
             fontSize: 8.0),

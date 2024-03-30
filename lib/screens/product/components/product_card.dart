@@ -98,7 +98,7 @@ void initState() {
             width: MediaQuery.of(context).size.width / 2 - 29,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                color:PAGE_BACKGROUND_COLOR,),
+                color:AppSettings.PAGE_BACKGROUND_COLOR,),
             child: Stack(
               fit: StackFit.expand,
               children: <Widget>[

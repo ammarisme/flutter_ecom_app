@@ -56,9 +56,9 @@ class _RatingPageState extends State<RatingPage> {
                             height: 92,
                             width: 92,
                             decoration: BoxDecoration(
-                                color: PAGE_BACKGROUND_COLOR,
+                                color: AppSettings.PAGE_BACKGROUND_COLOR,
                                 shape: BoxShape.circle,
-                                boxShadow: shadow,
+                                boxShadow: AppSettings.shadow,
                                 border: Border.all(
                                     width: 8.0, color: Colors.white)),
                             child: Image.asset('assets/product_image_1.png'),

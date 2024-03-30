@@ -74,7 +74,7 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                         Text(
                           'Payment',
                           style: TextStyle(
-                            color: darkGrey,
+                            color: AppSettings.darkGrey,
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
@@ -120,7 +120,7 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                                 color: Colors.white,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(45)),
-                                border: Border.all(color: PAGE_BACKGROUND_COLOR, width: 1.5)),
+                                border: Border.all(color: AppSettings.PAGE_BACKGROUND_COLOR as Color, width: 1.5)),
                             child: openOptions.value < 300
                                 ? Container()
                                 : Align(

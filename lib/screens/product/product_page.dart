@@ -41,7 +41,7 @@ class _ProductPageState extends State<ProductPage> {
         height: 80,
         width: width / 1.5,
         decoration: BoxDecoration(
-            gradient: MAIN_BUTTON_GRADIENTS,
+            gradient: AppSettings.MAIN_BUTTON_GRADIENTS,
             boxShadow: [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -68,11 +68,11 @@ class _ProductPageState extends State<ProductPage> {
           )
         ],
         child: Scaffold(
-          backgroundColor: PAGE_BACKGROUND_COLOR,
+          backgroundColor: AppSettings.PAGE_BACKGROUND_COLOR,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0.0,
-            iconTheme: IconThemeData(color: darkGrey),
+            iconTheme: IconThemeData(color: AppSettings.darkGrey),
             actions: <Widget>[
               IconButton(
                 icon: new SvgPicture.asset(
@@ -86,7 +86,7 @@ class _ProductPageState extends State<ProductPage> {
             title: Text(
               "Product",
               style: const TextStyle(
-                  color: darkGrey, fontWeight: FontWeight.w500, fontSize: 18.0),
+                  color: AppSettings.darkGrey, fontWeight: FontWeight.w500, fontSize: 18.0),
             ),
           ),
           body: Stack(

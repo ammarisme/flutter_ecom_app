@@ -82,7 +82,7 @@ class _SearchPageState extends State<SearchPage>
                 Text(
                   'Search',
                   style: TextStyle(
-                    color: darkGrey,
+                    color: AppSettings.darkGrey,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
@@ -119,7 +119,7 @@ class _SearchPageState extends State<SearchPage>
                   });
                 }
               },
-              cursorColor: darkGrey,
+              cursorColor: AppSettings.darkGrey,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.zero,
                 border: InputBorder.none,

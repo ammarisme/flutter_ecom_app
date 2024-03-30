@@ -46,7 +46,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
                 child: Text(
                   'Category List',
                   style: TextStyle(
-                    color: darkGrey,
+                    color: AppSettings.darkGrey,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),

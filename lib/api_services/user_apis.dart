@@ -11,7 +11,7 @@ class UserAPIs {
   static Future<User?> getUser(String id) async {
     print('fetching user........');
     try {
-      final Uri url = Uri.parse(Variables.base_url + '/customers/${id}');
+      final Uri url = Uri.parse(ApiService.base_url +'/wp-json/wc/v3'+ '/customers/${id}');
 
       final response = await http.get(
         url,
@@ -85,7 +85,7 @@ class UserAPIs {
   static Future<bool> updateCustomer(User user) async {
     print('updating user');
     try {
-      final Uri url = Uri.parse(Variables.base_url + '/customers/${user.id}');
+      final Uri url = Uri.parse(ApiService.base_url + '/wp-json/wc/v3'+'/customers/${user.id}');
 
       final response = await http.put(
         url,
@@ -118,7 +118,7 @@ class UserAPIs {
   static Future<APIResponse> createCustomer(User user) async {
     print('updating user');
     try {
-      final Uri url = Uri.parse(Variables.base_url + '/customers');
+      final Uri url = Uri.parse(ApiService.base_url + '/wp-json/wc/v3'+ '/customers');
       //final data = user.toJson().toString();
       final response = await http.post(
         url,

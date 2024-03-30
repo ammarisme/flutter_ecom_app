@@ -31,7 +31,7 @@ class ShopProduct extends StatelessWidget {
                 product.name,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: darkGrey,
+                  color: AppSettings.darkGrey,
                 ),
               ),
             ),
@@ -39,7 +39,7 @@ class ShopProduct extends StatelessWidget {
               '\Rs. ${product.salePrice}',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: darkGrey, fontWeight: FontWeight.bold, fontSize: 18.0),
+                  color: AppSettings.darkGrey, fontWeight: FontWeight.bold, fontSize: 18.0),
             ),
           ],
         ));

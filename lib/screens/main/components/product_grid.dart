@@ -196,7 +196,7 @@ class ProductThumb extends StatelessWidget{
                                     topRight: Radius.circular(10),
                                     bottomRight: Radius.circular(10),
                                   ),
-                                  color: THEME_COLOR_1.withOpacity(0.2), // Adjust the opacity if needed
+                                  color: (AppSettings.THEME_COLOR_1 as Color).withOpacity(0.2), // Adjust the opacity if needed
                                 ),
                                 child: Text(
                                   '${product.name}',
@@ -223,7 +223,7 @@ class ProductThumb extends StatelessWidget{
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(10),
                               bottomRight: Radius.circular(10)),
-                          color: PRICE_COLOR_SALE.withOpacity(0.7),
+                          color: (AppSettings.PRICE_COLOR_SALE  as Color).withOpacity(0.7),
                         ),
                         child:
                          Text(

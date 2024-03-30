@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:ecommerce_int2/api_services/cart_apis.dart';
 import 'package:ecommerce_int2/app_properties.dart';
 import 'package:ecommerce_int2/common/utils.dart';
+import 'package:ecommerce_int2/models/api_response.dart';
 import 'package:ecommerce_int2/models/user.dart';
 import 'package:ecommerce_int2/screens/components/ui_components.dart';
 import 'package:ecommerce_int2/screens/main/main_page.dart';
+import 'package:ecommerce_int2/screens/profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -48,7 +52,7 @@ class _ConfirmYourOrderPageState extends State<ConfirmYourOrderPage> {
                                   Text(
                                     'Confirm your order (3/3)',
                                     style: TextStyle(
-                                      color: darkGrey,
+                                      color: AppSettings.darkGrey,
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -63,7 +67,7 @@ class _ConfirmYourOrderPageState extends State<ConfirmYourOrderPage> {
                                     16.0, 16, 16.0, 16.0),
                                 decoration: BoxDecoration(
                                     color: Colors.white,
-                                    boxShadow: shadow,
+                                    boxShadow: AppSettings.shadow,
                                     borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(10),
                                         bottomRight: Radius.circular(10))),
@@ -147,7 +151,7 @@ class _ConfirmYourOrderPageState extends State<ConfirmYourOrderPage> {
                                   16.0, 0, 16.0, 16.0),
                               decoration: BoxDecoration(
                                   color: Colors.white,
-                                  boxShadow: shadow,
+                                  boxShadow: AppSettings.shadow,
                                   borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(10),
                                       bottomRight: Radius.circular(10))),
@@ -385,19 +389,28 @@ class _ConfirmYourOrderPageState extends State<ConfirmYourOrderPage> {
                                 onTap: () {
                                   Utils.showToast("Placing your order",
                                       ToastType.in_progress);
-                                  cartNotifier.createOrder().then((value) {
-                                    CartAPIs.clearTheCart().then((value) {
-                                      if (value.status == true) {
-                                        print("cart is cleared");
-                                        Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainPage()));
-                                      }
+                                  cartNotifier.createOrder().then((status) {
+                                    if (status) {
+                                      CartAPIs.clearTheCart().then((value) {
+                                        if (value.status == true) {
+                                          print("cart is cleared");
+                                          Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MainPage()));
+                                        }
+                                        Utils.showToast(
+                                            "Your order is confirmed.",
+                                            ToastType.done_success);
+                                            Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+                                      });
+                                    }else{
                                       Utils.showToast(
-                                          "Your order is confirmed.",
-                                          ToastType.done_success);
-                                    });
+                                            "Order confirmation failed.",
+                                            ToastType.done_success);
+                                    }
+                                    
                                     // ScaffoldMessenger.of(context).showSnackBar(
                                     //   SnackBar(
                                     //     content: Text(value?'Order created':"Error: Order creation"),

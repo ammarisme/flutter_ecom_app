@@ -18,7 +18,7 @@ class NotificationsPage extends StatelessWidget {
                   Text(
                     'Notification',
                     style: TextStyle(
-                      color: darkGrey,
+                      color: AppSettings.darkGrey,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
@@ -150,7 +150,7 @@ class NotificationsPage extends StatelessWidget {
                             child: Container(
                                 padding: const EdgeInsets.all(14.0),
                                 decoration: BoxDecoration(
-                                    color: PAGE_BACKGROUND_COLOR,
+                                    color: AppSettings.PAGE_BACKGROUND_COLOR,
                                     borderRadius: BorderRadius.only(
                                         bottomRight: Radius.circular(5.0),
                                         bottomLeft: Radius.circular(5.0))),

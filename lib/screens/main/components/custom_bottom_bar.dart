@@ -11,7 +11,7 @@ class CustomBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-              height:screenAwareSize(12, context),
+              height:AppSettings.screenAwareSize(12, context),
       child: Row(
 
         mainAxisAlignment: MainAxisAlignment.spaceAround,

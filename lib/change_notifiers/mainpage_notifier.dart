@@ -1,4 +1,5 @@
 // Define a ProductNotifier class that extends ChangeNotifier
+import 'package:ecommerce_int2/api_services/api_service.dart';
 import 'package:ecommerce_int2/api_services/cart_apis.dart';
 import 'package:ecommerce_int2/api_services/product_apis.dart';
 import 'package:ecommerce_int2/models/product_review.dart';
@@ -33,7 +34,7 @@ class MainPageNotifier extends ChangeNotifier {
 
   // Method to update the list of products
   Future<bool> updateProducts() {
-    ProductAPIs.getProducts("608").then((value) {
+    ProductAPIs.getProducts(ApiService.main_carousal_category).then((value) {
       _products = value;
       notifyListeners();
     });

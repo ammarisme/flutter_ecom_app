@@ -17,7 +17,7 @@ class _UnpaidPageState extends State<UnpaidPage> {
         height: 80,
         width: MediaQuery.of(context).size.width / 1.5,
         decoration: BoxDecoration(
-            gradient: MAIN_BUTTON_GRADIENTS,
+            gradient: AppSettings.MAIN_BUTTON_GRADIENTS,
             boxShadow: [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -59,7 +59,7 @@ class _UnpaidPageState extends State<UnpaidPage> {
                                   Text(
                                     'Unpaid',
                                     style: TextStyle(
-                                      color: darkGrey,
+                                      color: AppSettings.darkGrey,
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -75,7 +75,7 @@ class _UnpaidPageState extends State<UnpaidPage> {
                                   16.0, 0, 16.0, 16.0),
                               decoration: BoxDecoration(
                                   color: Colors.white,
-                                  boxShadow: shadow,
+                                  boxShadow: AppSettings.shadow,
                                   borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(10),
                                       bottomRight: Radius.circular(10))),

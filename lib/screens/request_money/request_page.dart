@@ -49,7 +49,7 @@ class _RequestPageState extends State<RequestPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Request Amount',
-          style: TextStyle(color: darkGrey),
+          style: TextStyle(color: AppSettings.darkGrey),
         ),
         elevation: 0,
       ),
@@ -84,7 +84,7 @@ class _RequestPageState extends State<RequestPage> {
                 //     });
                 //   }
                 // },
-                cursorColor: darkGrey,
+                cursorColor: AppSettings.darkGrey,
                 decoration: InputDecoration(
                     hintText: 'Search',
                     contentPadding: EdgeInsets.zero,

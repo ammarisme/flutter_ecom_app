@@ -17,7 +17,7 @@ class PromoItem extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 16.0),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    boxShadow: shadow,
+                    boxShadow: AppSettings.shadow,
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10))),
@@ -39,7 +39,7 @@ class PromoItem extends StatelessWidget {
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 12,
-                                    color: darkGrey,
+                                    color: AppSettings.darkGrey,
                                   ),
                                 ),
                                 Padding(
@@ -54,7 +54,7 @@ class PromoItem extends StatelessWidget {
                                         '\Rs. 58.24',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            color: darkGrey,
+                                            color: AppSettings.darkGrey,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18.0),
                                       )

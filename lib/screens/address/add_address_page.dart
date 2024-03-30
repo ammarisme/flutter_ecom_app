@@ -12,11 +12,11 @@ Widget addAddressForm = AddAddressForm();
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: darkGrey),
+        iconTheme: IconThemeData(color: AppSettings.darkGrey),
         title: Text(
           'Your information (1/3)',
           style: const TextStyle(
-              color: darkGrey,
+              color: AppSettings.darkGrey,
               fontWeight: FontWeight.w500,
               fontFamily: "Montserrat",
               fontSize: 18.0),

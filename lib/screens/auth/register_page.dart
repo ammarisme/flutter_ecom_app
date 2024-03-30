@@ -21,11 +21,11 @@ class RegisterPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: darkGrey),
+        iconTheme: IconThemeData(color: AppSettings.darkGrey),
         title: Text(
           'Sign up',
           style: const TextStyle(
-              color: darkGrey,
+              color: AppSettings.darkGrey,
               fontWeight: FontWeight.w500,
               fontFamily: "Montserrat",
               fontSize: 18.0),
@@ -136,7 +136,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
             child: CircularProgressIndicator(), // Or any other loader widget
           )
         : SizedBox(
-            height: screenAwareSize(80, context),
+            height: AppSettings.screenAwareSize(80, context),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,7 +208,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     title: Text('Invalid inputs found'),
                                     content: Container(
                                       width: double.maxFinite,
-                                      height: screenAwareSize(60,
+                                      height: AppSettings.screenAwareSize(60,
                                           context), // Set a fixed height (you can adjust this)
                                       child: ListView.builder(
                                         itemCount: valResult.errors.length,

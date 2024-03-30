@@ -9,13 +9,13 @@ class SMSAPIs {
       final Map<String, String> data = {
         'to': phoneNumber,
         'message': message,
-        'sender_id': Variables.sms_sender_id,
-        'api_key': Variables.sms_api_key,
-        'user_id': Variables.sms_user_id,
+        'sender_id': ApiService.sms_sender_id,
+        'api_key': ApiService.sms_api_key,
+        'user_id': ApiService.sms_user_id,
       };
 
       final response = await http.post(
-        Uri.parse(Variables.notifylk_url +
+        Uri.parse(ApiService.smsservice_url +
             '/send'), // Replace with your authentication endpoint
         body: json.encode(data),
         headers: {

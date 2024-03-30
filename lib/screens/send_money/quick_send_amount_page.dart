@@ -18,7 +18,7 @@ class QuickSendAmountPage extends StatelessWidget {
         width: width / 1.5,
         // width: width / 1.5,
         decoration: BoxDecoration(
-            gradient: MAIN_BUTTON_GRADIENTS,
+            gradient: AppSettings.MAIN_BUTTON_GRADIENTS,
             boxShadow: [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -59,7 +59,7 @@ class QuickSendAmountPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           title: Text(
             'Send Amount',
-            style: TextStyle(color: darkGrey),
+            style: TextStyle(color: AppSettings.darkGrey),
           ),
           elevation: 0,
         ),
@@ -78,7 +78,7 @@ class QuickSendAmountPage extends StatelessWidget {
                               height: MediaQuery.of(context).size.height / 2.3,
                               padding: const EdgeInsets.all(16.0),
                               width: double.infinity,
-                              color: PAGE_BACKGROUND_COLOR,
+                              color: AppSettings.PAGE_BACKGROUND_COLOR,
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ecommerce_int2/api_services/api_service.dart';
 import 'package:ecommerce_int2/models/product_variation.dart';
 import 'package:http/http.dart' as http;
 import '../models/category.dart';
@@ -8,13 +9,13 @@ import '../models/product_review.dart';
 import '../settings.dart';
 
 class Variables {
-  static String base_url = 'https://catlitter.lk/wp-json/wc/v3';
+  static String base_url = ApiService.base_url + '/wp-json/wc/v3';
 }
 
 //API service
 class ProductAPIs {
   static String base_url() {
-    return 'https://catlitter.lk/wp-json/wc/v3';
+    return ApiService.base_url + '/wp-json/wc/v3';
   }
 
   static Future<double> getProductRating(String productId) async {
@@ -36,7 +37,7 @@ class ProductAPIs {
   static Future<List<Product>> getProducts(dynamic categoryId) async {
     print('fetching products from updateProducts');
     try {
-      final Uri url = Uri.parse(base_url() + '/products?category=$categoryId');
+      final Uri url = Uri.parse(base_url() + '/products?category=$categoryId&per_page=100');
 
       final response = await http.get(
         url,
@@ -50,7 +51,6 @@ class ProductAPIs {
         List<dynamic> data = json.decode(response.body);
         List<Product> products =
             data.map((item) => Product.fromJson(item)).toList();
-        print(products);
         return products;
       } else {
         print('Failed to load products: ${response.statusCode}');
@@ -187,7 +187,7 @@ class ProductAPIs {
     print('fetching products........');
     try {
       final Uri url = Uri.parse(
-          'https://catlitter.lk/wp-json/wc/v3/products?per_page=100&search=${search_text}');
+          ApiService.base_url + '/wp-json/wc/v3/products?per_page=100&search=${search_text}');
       print(url);
       final response = await http.get(
         url,

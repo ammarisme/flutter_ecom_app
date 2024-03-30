@@ -8,7 +8,7 @@ import '../models/cart.dart';
 import '../settings.dart';
 
 class CartAPIs {
-  static final base_url = 'https://catlitter.lk/wp-json/wc/store';
+  static final base_url = ApiService.base_url+'/wp-json/wc/store';
 
   static Future<Cart?> getCart() async {
     try {
@@ -67,7 +67,7 @@ class CartAPIs {
 
   static Future<String?> getCartNonce(String username, String password) async {
     try {
-      final Uri url = Uri.parse(Variables.store_url + 'cart');
+      final Uri url = Uri.parse(ApiService.store_url + 'cart');
      
       final storage = FlutterSecureStorage();
        final String basicAuth =
@@ -154,7 +154,7 @@ class CartAPIs {
     final encoded_body = jsonEncode(data);
     try {
       final Uri url = Uri.parse(
-          'https://catlitter.lk/wp-json/wc/store' + '/cart/items/' + key);
+          ApiService.base_url+'/wp-json/wc/store' + '/cart/items/' + key);
 
       final response = await http.put(url,
           headers: {
@@ -200,7 +200,7 @@ class CartAPIs {
 
   if(basicAuth != null){
     try {
-      final Uri url = Uri.parse('https://catlitter.lk/wp-json/wc/store' + '/cart/items/' + key);
+      final Uri url = Uri.parse(ApiService.base_url +'/wp-json/wc/store' + '/cart/items/' + key);
 
       final response = await http.delete(
         url,
@@ -216,7 +216,7 @@ class CartAPIs {
       } else {
         return false;
       }
-    } catch (ex, stackTrace) {
+    } catch (ex) {
       return false;
     }
   }else{
@@ -239,7 +239,7 @@ class CartAPIs {
   Future<bool> createOrder(Cart? cart) async {
     try {
       final Uri url =
-          Uri.parse('https://catlitter.lk/wp-json/wc/v3' + '/orders');
+          Uri.parse(ApiService.base_url +'/wp-json/wc/v3' + '/orders');
 
       Map<String, dynamic>? postData = cart?.toJson();
 
@@ -280,7 +280,11 @@ class CartAPIs {
     try {
       final storage = FlutterSecureStorage();
 
+      //empty the local cart
+      await storage.write(key: 'local_cart', value: '{"coupons":[],"shipping_rates":[],"shipping_address":{"first_name":"","last_name":"","company":"","address_1":"","address_2":"","city":"","state":"","postcode":"","country":"","phone":""},"billing_address":{"first_name":"","last_name":"","company":"","address_1":"","address_2":"","city":"","state":"","postcode":"","country":"","email":"","phone":""},"items":[],"items_count":0,"items_weight":0,"cross_sells":[],"needs_payment":false,"needs_shipping":false,"has_calculated_shipping":false,"fees":[],"totals":{"total_items":"0","total_items_tax":"0","total_fees":"0","total_fees_tax":"0","total_discount":"0","total_discount_tax":"0","total_shipping":null,"total_shipping_tax":null,"total_price":"0","total_tax":"0","tax_lines":[],"currency_code":"LKR","currency_symbol":"Rs. ","currency_minor_unit":2,"currency_decimal_separator":".","currency_thousand_separator":",","currency_prefix":"Rs. ","currency_suffix":""},"errors":[],"payment_requirements":["products"],"extensions":{}}');
+
       var value_ba = await storage.read(key: 'auth_header');
+      
       if (value_ba == null) {
         //The user hasn't logged in. This is guest checkout mode.
         //Maintain the cart in the local storage.
@@ -297,7 +301,7 @@ class CartAPIs {
         // String cart_nonce = await storage.read(key: 'cart_nonce') as String;
 
         final response = await http.delete(
-          Uri.parse(Variables.store_url +
+          Uri.parse(ApiService.store_url +
               'cart/items'), // Replace with your authentication endpoint
           headers: {
             "Content-Type": "application/json",

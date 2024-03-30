@@ -47,7 +47,7 @@ class ProfilePage extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                            color: THEME_COLOR_3,
+                            color: AppSettings.THEME_COLOR_3 as Color,
                             blurRadius: 4,
                             spreadRadius: 1,
                             offset: Offset(0, 1))
@@ -97,7 +97,7 @@ class ProfilePage extends StatelessWidget {
                     'assets/icons/settings_icon.png', fit: BoxFit.scaleDown,
                     width: 30,
                     height: 30,),
-                  trailing: Icon(Icons.chevron_right, color: PAGE_BACKGROUND_COLOR),
+                  trailing: Icon(Icons.chevron_right, color: AppSettings.PAGE_BACKGROUND_COLOR),
                   onTap: () =>
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => SettingsPage())),
@@ -109,7 +109,7 @@ class ProfilePage extends StatelessWidget {
                   leading: Image.asset('assets/icons/support.png'),
                   trailing: Icon(
                     Icons.chevron_right,
-                    color: PAGE_BACKGROUND_COLOR,
+                    color: AppSettings.PAGE_BACKGROUND_COLOR,
                   ),
                 ),
                 Divider(),
@@ -117,7 +117,7 @@ class ProfilePage extends StatelessWidget {
                   title: Text('FAQ'),
                   subtitle: Text('Questions and Answer'),
                   leading: Image.asset('assets/icons/faq.png'),
-                  trailing: Icon(Icons.chevron_right, color: PAGE_BACKGROUND_COLOR),
+                  trailing: Icon(Icons.chevron_right, color: AppSettings.PAGE_BACKGROUND_COLOR),
                   onTap: () =>
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => FaqPage())),

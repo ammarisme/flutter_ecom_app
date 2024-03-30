@@ -31,8 +31,8 @@ class ActionButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width / 2,
         decoration: BoxDecoration(
             gradient: buttonType == ButtonType.disabled_navigation
-                ? DISABLED_BUTTON_GRADIENTS
-                : MAIN_BUTTON_GRADIENTS,
+                ?  AppSettings.DISABLED_BUTTON_GRADIENTS
+                : AppSettings.MAIN_BUTTON_GRADIENTS,
             boxShadow: [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.16),

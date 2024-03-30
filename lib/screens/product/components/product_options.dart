@@ -139,12 +139,12 @@ class _ProductOptionState extends State<ProductOption> {
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width /
-                          MAIN_BUTTON_FACTOR,
+                          (AppSettings.MAIN_BUTTON_FACTOR as int),
                       decoration: BoxDecoration(
                           color: getStockQuantity() > 0
-                              ? BUTTON_COLOR_1
-                              : BUTTON_COLOR_1_INACTIVE,
-                          gradient: MAIN_BUTTON_GRADIENTS,
+                              ? AppSettings.BUTTON_COLOR_1
+                              : AppSettings.BUTTON_COLOR_1_INACTIVE,
+                          gradient: AppSettings.MAIN_BUTTON_GRADIENTS,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10.0),
                               bottomLeft: Radius.circular(10.0))),
@@ -154,17 +154,17 @@ class _ProductOptionState extends State<ProductOption> {
                         children: [
                           Icon(Icons.shopping_bag,
                               color:
-                                  BUTTON_TEXT_COLOR1, // Set icon color as needed
-                              size: BUTTON_ICON_SIZE),
+                                  AppSettings.BUTTON_TEXT_COLOR1, // Set icon color as needed
+                              size: AppSettings.BUTTON_ICON_SIZE),
                           SizedBox(
                               width:
                                   3), // Adjust the space between text and icon
                           Text(
                             'Buy Now',
                             style: TextStyle(
-                              color: BUTTON_TEXT_COLOR1,
+                              color: AppSettings.BUTTON_TEXT_COLOR1,
                               fontWeight: FontWeight.bold,
-                              fontSize: BUTTON_FONT_SIZE,
+                              fontSize: AppSettings.BUTTON_FONT_SIZE,
                             ),
                           ),
                         ],
@@ -204,12 +204,12 @@ class _ProductOptionState extends State<ProductOption> {
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width /
-                          MAIN_BUTTON_FACTOR,
+                          (AppSettings.MAIN_BUTTON_FACTOR as int),
                       decoration: BoxDecoration(
                           color: getStockQuantityOfAllVariations() > 0
-                              ? BUTTON_COLOR_1
-                              : BUTTON_COLOR_1_INACTIVE,
-                          gradient: MAIN_BUTTON_GRADIENTS,
+                              ? AppSettings.BUTTON_COLOR_1
+                              : AppSettings.BUTTON_COLOR_1_INACTIVE,
+                          gradient: AppSettings.MAIN_BUTTON_GRADIENTS,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10.0),
                               bottomLeft: Radius.circular(10.0))),
@@ -219,17 +219,17 @@ class _ProductOptionState extends State<ProductOption> {
                         children: [
                           Icon(Icons.shopping_cart_outlined,
                               color:
-                                  BUTTON_TEXT_COLOR1, // Set icon color as needed
-                              size: BUTTON_ICON_SIZE),
+                                  AppSettings.BUTTON_TEXT_COLOR1, // Set icon color as needed
+                              size: AppSettings.BUTTON_ICON_SIZE),
                           SizedBox(width: 3),
                           Text(
                             getStockQuantityOfAllVariations() > 0
                                 ? 'Add to cart'
                                 : 'Out of stock',
                             style: TextStyle(
-                              color: BUTTON_TEXT_COLOR1,
+                              color: AppSettings.BUTTON_TEXT_COLOR1,
                               fontWeight: FontWeight.bold,
-                              fontSize: BUTTON_FONT_SIZE,
+                              fontSize: AppSettings.BUTTON_FONT_SIZE,
                             ),
                           ),
                           // Adjust the space between text and icon
@@ -255,12 +255,12 @@ class _ProductOptionState extends State<ProductOption> {
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width /
-                                MAIN_BUTTON_FACTOR,
+                                (AppSettings.MAIN_BUTTON_FACTOR as int),
                             decoration: BoxDecoration(
                                 color: getStockQuantity() > 0
-                                    ? BUTTON_COLOR_1
-                                    : BUTTON_COLOR_1_INACTIVE,
-                                gradient: MAIN_BUTTON_GRADIENTS,
+                                    ? AppSettings.BUTTON_COLOR_1
+                                    : AppSettings.BUTTON_COLOR_1_INACTIVE,
+                                gradient: AppSettings.MAIN_BUTTON_GRADIENTS,
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(10.0),
                                     bottomLeft: Radius.circular(10.0))),
@@ -271,16 +271,16 @@ class _ProductOptionState extends State<ProductOption> {
                                 Text(
                                   widget.product.rating.toString(),
                                   style: TextStyle(
-                                    color: BUTTON_TEXT_COLOR1,
+                                    color: AppSettings.BUTTON_TEXT_COLOR1,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: BUTTON_FONT_SIZE,
+                                    fontSize: AppSettings.BUTTON_FONT_SIZE,
                                   ),
                                 ),
                                 SizedBox(width: 3),
                                 Icon(Icons.star_outline,
                                     color:
-                                        BUTTON_TEXT_COLOR1, // Set icon color as needed
-                                    size: BUTTON_ICON_SIZE),
+                                        AppSettings.BUTTON_TEXT_COLOR1, // Set icon color as needed
+                                    size: AppSettings.BUTTON_ICON_SIZE),
                                 SizedBox(width: 3),
 
                                 // Adjust the space between text and icon
@@ -421,7 +421,7 @@ class _ProductOptionState extends State<ProductOption> {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: BUTTON_FONT_SIZE,
+                                    fontSize: AppSettings.BUTTON_FONT_SIZE,
                                   ),
                                 ),
                                 // Adjust the space between text and icon
@@ -758,9 +758,9 @@ class CustomButton extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width / 2.7,
           decoration: BoxDecoration(
-              color: this.enabled ? BUTTON_COLOR_1 : BUTTON_COLOR_1_INACTIVE,
+              color: this.enabled ? AppSettings.BUTTON_COLOR_1 : AppSettings.BUTTON_COLOR_1_INACTIVE,
               border: Border.all(
-                color:this.enabled ? BUTTON_COLOR_1 : BUTTON_COLOR_1_INACTIVE, // Set border color to black
+                color:(this.enabled ? AppSettings.BUTTON_COLOR_1 : AppSettings.BUTTON_COLOR_1_INACTIVE) as Color, // Set border color to black
                 width: 1.0, // Set border width
               ),
               borderRadius: BorderRadius.all(Radius.circular(5.0))),
@@ -773,7 +773,7 @@ class CustomButton extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: this.size == ButtonSize.small ?  SMALL_BUTTON_FONT_SIZE : BUTTON_FONT_SIZE,
+                  fontSize: this.size == ButtonSize.small ?  AppSettings.SMALL_BUTTON_FONT_SIZE : AppSettings.BUTTON_FONT_SIZE,
                 ),
               ),
               // Adjust the space between text and icon

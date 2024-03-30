@@ -19,7 +19,7 @@ class SelectCardPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           title: Text(
             'Select Card',
-            style: TextStyle(color: darkGrey),
+            style: TextStyle(color: AppSettings.darkGrey),
           ),
           elevation: 0,
         ),
@@ -39,7 +39,7 @@ class SelectCardPage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Color(0xff353A85),
                         borderRadius: BorderRadius.all(Radius.circular(10)),
-                        boxShadow: shadow),
+                        boxShadow: AppSettings.shadow),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -71,7 +71,7 @@ class SelectCardPage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Color(0xffA647DD),
                         borderRadius: BorderRadius.all(Radius.circular(10)),
-                        boxShadow: shadow),
+                        boxShadow: AppSettings.shadow),
                   ),
                 ),
                 Positioned(
@@ -82,7 +82,7 @@ class SelectCardPage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Color(0xff454ECA),
                         borderRadius: BorderRadius.all(Radius.circular(10)),
-                        boxShadow: shadow),
+                        boxShadow: AppSettings.shadow),
                   ),
                 ),
                 Positioned(
@@ -96,7 +96,7 @@ class SelectCardPage extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          boxShadow: shadow),
+                          boxShadow: AppSettings.shadow),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,

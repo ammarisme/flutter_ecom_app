@@ -13,7 +13,7 @@ class OrderSuccessPage extends StatelessWidget {
         height: 80,
         width: MediaQuery.of(context).size.width / 1.5,
         decoration: BoxDecoration(
-            gradient: MAIN_BUTTON_GRADIENTS,
+            gradient: AppSettings.MAIN_BUTTON_GRADIENTS,
             boxShadow: [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -38,11 +38,11 @@ class OrderSuccessPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: darkGrey),
+        iconTheme: IconThemeData(color: AppSettings.darkGrey),
         title: Text(
           'Order placed',
           style: const TextStyle(
-              color: darkGrey,
+              color: AppSettings.darkGrey,
               fontWeight: FontWeight.w500,
               fontFamily: "Montserrat",
               fontSize: 18.0),

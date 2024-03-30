@@ -23,7 +23,7 @@ class _ConfirmOtpPageState extends State<ConfirmOtp1Page> {
             image: DecorationImage(
                 image: AssetImage('assets/background.jpg'), fit: BoxFit.cover)),
         child: Container(
-            decoration: BoxDecoration(color: THEME_COLOR_3),
+            decoration: BoxDecoration(color: AppSettings.THEME_COLOR_3),
             child: Scaffold(
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
@@ -31,7 +31,7 @@ class _ConfirmOtpPageState extends State<ConfirmOtp1Page> {
                   title: Text(
                     'OTP verification',
                     style: const TextStyle(
-                        color: darkGrey,
+                        color: AppSettings.darkGrey,
                         fontWeight: FontWeight.w500,
                         fontFamily: "Montserrat",
                         fontSize: 18.0),
@@ -41,14 +41,14 @@ class _ConfirmOtpPageState extends State<ConfirmOtp1Page> {
                   Column(children: [
                     // Image.network("Add Image Link"),
                     SizedBox(
-                      height: screenAwareSize(10, context),
+                      height: AppSettings.screenAwareSize(10, context),
                     ),
                     Text(
                       "Enter verification code sent via SMS to " +
                           widget.phoneNumber,
                     ),
                     SizedBox(
-                      height: screenAwareSize(10, context),
+                      height: AppSettings.screenAwareSize(10, context),
                     ),
 
                     OTPTextField(
@@ -73,7 +73,7 @@ class _ConfirmOtpPageState extends State<ConfirmOtp1Page> {
                           borderColor: Colors.black,
                         )),
                     SizedBox(
-                      height: screenAwareSize(10, context),
+                      height: AppSettings.screenAwareSize(10, context),
                     ),
 
                 

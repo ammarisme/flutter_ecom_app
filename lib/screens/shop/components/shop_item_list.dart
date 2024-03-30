@@ -41,15 +41,15 @@ class _ShopItemListState extends State<ShopItemList> {
           //textEditingController.text =  cartNotifier.cart!.line_items.where((cart_item) => cart_item.product_id == cart_item.product_id).first.quantity.toString();
           return Container(
             margin: EdgeInsets.only(top: 20),
-            height: screenAwareSize(20, context),
+            height: AppSettings.screenAwareSize(20, context),
             child: Stack(
               children: <Widget>[
                 Container(
-                    height: screenAwareSize(80, context),
+                    height: AppSettings.screenAwareSize(80, context),
                     margin: EdgeInsets.symmetric(horizontal: 0.0),
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        boxShadow: shadow,
+                        boxShadow: AppSettings.shadow,
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10))),
@@ -138,21 +138,21 @@ class _ShopItemListState extends State<ShopItemList> {
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 12,
-                                    color: darkGrey,
+                                    color: AppSettings.darkGrey,
                                   ),
                                 ), 
                                 Text(
                                           'Price : \Rs. ${Utils.thousandSeperate(widget.cart_item.salePrice.toString())}',
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
-                                              color: darkGrey,
+                                              color: AppSettings.darkGrey,
                                               fontSize: 12.0),
                                         ),
                                          Text(
                                           'Line total : \Rs. ${Utils.thousandSeperate((widget.cart_item.salePrice*widget.cart_item.quantity).toString())}',
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
-                                              color: darkGrey,
+                                              color: AppSettings.darkGrey,
                                               fontSize: 12.0),
                                         ),// Product name
                                 // Align(
@@ -311,7 +311,7 @@ class _ShopItemListState extends State<ShopItemList> {
                                         }
                                       },
                                       child: Container(
-                              width: screenAwareWidth(15, context),
+                              width: AppSettings.screenAwareWidth(15, context),
                               child: 
                               Container(
                                  decoration: BoxDecoration(

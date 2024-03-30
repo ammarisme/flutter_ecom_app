@@ -1,6 +1,8 @@
-
+import 'package:ecommerce_int2/api_services/api_service.dart';
+import 'package:ecommerce_int2/api_services/settings_api.dart';
 import 'package:ecommerce_int2/app_properties.dart';
 import 'package:ecommerce_int2/change_notifiers/user_notifier.dart';
+import 'package:ecommerce_int2/common/utils.dart';
 import 'package:ecommerce_int2/custom_background.dart';
 import 'package:ecommerce_int2/models/product.dart';
 import 'package:ecommerce_int2/screens/auth/login_page.dart';
@@ -32,24 +34,18 @@ class MainContent extends StatefulWidget {
 
 class _MainContentState extends State<MainContent>
     with TickerProviderStateMixin<MainContent> {
-  TabController? tabController;
-  TabController? bottomTabController;
-  bool isStateUpdated = false;
-
-  List<Product> products = [];
-
-  List<String> timelines = ['Featured products', ''];
-  String selectedTimeline = 'Featured products';
-
+      MainContentVM vm = MainContentVM();
+ 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 10, vsync: this);
-    bottomTabController = TabController(length: 10, vsync: this);
-    print('initState');
-    if (!isStateUpdated) {
+    vm.tabController = TabController(length: 10, vsync: this);
+    vm.bottomTabController = TabController(length: 10, vsync: this);
+
+
+    if (!vm.isStateUpdated) {
       setState(() {
-        isStateUpdated = true;
+        vm.isStateUpdated = true;
       });
     }
    
@@ -57,7 +53,6 @@ class _MainContentState extends State<MainContent>
 
   @override
   Widget build(BuildContext context) {
-    print('building');
     MainPageNotifier mainPageNotifier = Provider.of<MainPageNotifier>(context, listen: true);
 
     Widget appBar = Container(
@@ -86,44 +81,44 @@ class _MainContentState extends State<MainContent>
               child: InkWell(
                 onTap: () {
                   setState(() {
-                    selectedTimeline = timelines[0];
-                    products = mainPageNotifier.products;
+                    vm.selectedTimeline = vm.timelines[0];
+                    vm.products = mainPageNotifier.products;
                   });
                 },
                 child: Text(
-                  timelines[0],
+                  vm.timelines[0],
                   style: TextStyle(
-                      fontSize: timelines[0] == selectedTimeline ? 20 : 14,
+                      fontSize: 16,
                       color:Colors.black,
                       ),
                 ),
               ),
             ),
-            Flexible(
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    selectedTimeline = timelines[1];
-                    products = mainPageNotifier.products;
-                    ;
-                  });
-                },
-                child: Text(timelines[1],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: timelines[1] == selectedTimeline ? 20 : 14,
-                        color: darkGrey)),
-              ),
-            ),
+            // Flexible(
+            //   child: InkWell(
+            //     onTap: () {
+            //       setState(() {
+            //         vm.selectedTimeline = vm.timelines[0];
+            //         vm.products = mainPageNotifier.products;
+            //         ;
+            //       });
+            //     },
+            //     child: Text(vm.timelines[0],
+            //         textAlign: TextAlign.center,
+            //         style: TextStyle(
+            //             fontSize: vm.timelines[0] == vm.selectedTimeline ? 20 : 14,
+            //             color: AppSettings.darkGrey)),
+            //   ),
+            // ),
           ],
         ));
 
     return Scaffold(
-      bottomNavigationBar: CustomBottomBar(controller: bottomTabController as TabController),
+      bottomNavigationBar: CustomBottomBar(controller: vm.bottomTabController as TabController),
       body: CustomPaint(
           painter: MainBackground(),
           child: TabBarView(
-            controller: bottomTabController,
+            controller: vm.bottomTabController,
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               SafeArea(
@@ -191,4 +186,20 @@ class LoginOrProfile extends StatelessWidget {
       ),
     );
   }
+}
+
+class MainContentVM{
+  MainContentVM(){
+    this.timelines = [ApiService.main_carousal_title];
+    this.selectedTimeline = ApiService.main_carousal_title;
+  }
+
+ TabController? tabController;
+  TabController? bottomTabController;
+  bool isStateUpdated = false;
+
+  List<Product> products = [];
+
+  List<String> timelines = [] ;
+  String selectedTimeline = "";
 }

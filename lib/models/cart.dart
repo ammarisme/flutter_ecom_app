@@ -325,7 +325,7 @@ class CartItem {
 
     return CartItem(
         key: json['key'] ?? '',
-        product_id: json['product_id']!="" && json['product_id']!=null ? int.parse(json['product_id']) : (json['id'] ?? 0),
+        product_id: json['product_id']!="" && json['product_id']!=null ? (json["product_id"] is int ?json['product_id'] : int.parse(json['product_id'])) : (json['id'] ?? 0),
         quantity: json['quantity'] ?? 0,
         name: json['name'] ?? '',
         // lowStockRemaining: json['low_stock_remaining'],

@@ -26,7 +26,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
           });
         },
         value: true,
-        activeColor: PAGE_BACKGROUND_COLOR,
+        activeColor: AppSettings.PAGE_BACKGROUND_COLOR,
       );
     } else {
       return Switch(
@@ -36,7 +36,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
           });
         },
         value: val,
-        activeColor: PAGE_BACKGROUND_COLOR,
+        activeColor: AppSettings.PAGE_BACKGROUND_COLOR,
       );
     }
   }
@@ -53,7 +53,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Settings',
-          style: TextStyle(color: darkGrey),
+          style: TextStyle(color: AppSettings.darkGrey),
         ),
         elevation: 0,
       ),

@@ -23,7 +23,7 @@ class ProductDisplay extends StatelessWidget {
                 height: 85,
                 padding: EdgeInsets.only(right: 24),
                 decoration: new BoxDecoration(
-                    color: darkGrey,
+                    color: AppSettings.darkGrey,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(8.0),
                         bottomLeft: Radius.circular(8.0)),
@@ -60,7 +60,7 @@ class ProductDisplay extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(right: 20.0, left: 20.0),
             child: Container(
-              height: screenAwareSize(220, context),
+              height: AppSettings.screenAwareSize(220, context),
               child: Stack(
                 children: <Widget>[
                   Padding(
@@ -140,7 +140,7 @@ void initState() {
                 height: 85,
                 padding: EdgeInsets.only(right: 24),
                 decoration: new BoxDecoration(
-                    color: darkGrey,
+                    color: AppSettings.darkGrey,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(8.0),
                         bottomLeft: Radius.circular(8.0)),
@@ -177,7 +177,7 @@ void initState() {
           child: Padding(
             padding: const EdgeInsets.only(right: 20.0, left: 20.0),
             child: Container(
-              height: screenAwareSize(220, context),
+              height: AppSettings.screenAwareSize(220, context),
               child: Stack(
                 children: <Widget>[
                   Padding(

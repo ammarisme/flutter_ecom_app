@@ -161,7 +161,7 @@ class _WelcomeBackPageState extends State<WelcomeBackPage> {
           ),
           Container(
             decoration: BoxDecoration(
-                color: THEME_COLOR_3,
+                color: AppSettings.THEME_COLOR_3,
 
             ),
           ),

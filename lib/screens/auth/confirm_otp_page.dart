@@ -27,7 +27,7 @@ class _ConfirmOtpPageState extends State<ConfirmOtpPage> {
             image: DecorationImage(
                 image: AssetImage('assets/background.jpg'), fit: BoxFit.cover)),
         child: Container(
-            decoration: BoxDecoration(color: THEME_COLOR_3),
+            decoration: BoxDecoration(color: AppSettings.THEME_COLOR_3),
             child: Scaffold(
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
@@ -35,7 +35,7 @@ class _ConfirmOtpPageState extends State<ConfirmOtpPage> {
                   title: Text(
                     'OTP verification',
                     style: const TextStyle(
-                        color: darkGrey,
+                        color: AppSettings.darkGrey,
                         fontWeight: FontWeight.w500,
                         fontFamily: "Montserrat",
                         fontSize: 18.0),
@@ -45,14 +45,14 @@ class _ConfirmOtpPageState extends State<ConfirmOtpPage> {
                   Column(children: [
                     // Image.network("Add Image Link"),
                     SizedBox(
-                      height: screenAwareSize(10, context),
+                      height: AppSettings.screenAwareSize(10, context),
                     ),
                     Text(
                       "Enter verification code sent via SMS to " +
                           widget.user!.phone_number,
                     ),
                     SizedBox(
-                      height: screenAwareSize(10, context),
+                      height: AppSettings.screenAwareSize(10, context),
                     ),
 
                     OTPTextField(
@@ -101,14 +101,14 @@ class _ConfirmOtpPageState extends State<ConfirmOtpPage> {
                                     widget.user!.id = value.result.id;
                                     widget.postConfirmation();
                                   });
-                                } else if(value.error_code == "registration-error-username-exists"){
+                                } else if(["registration-error-username-exists","registration-error-email-exists"].contains(value.error_code)){
                                     showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
                                     content: Container(
                                       width: double.maxFinite,
-                                      height: screenAwareSize(20,
+                                      height: AppSettings.screenAwareSize(20,
                                           context), // Set a fixed height (you can adjust this)
                                       child: Text("An account already exists under the mobile number you provided. Do you want to login first to coninue.?"),
                                     ),
@@ -143,7 +143,7 @@ class _ConfirmOtpPageState extends State<ConfirmOtpPage> {
                           borderColor: Colors.black,
                         )),
                     SizedBox(
-                      height: screenAwareSize(10, context),
+                      height: AppSettings.screenAwareSize(10, context),
                     ),
 
                     //Add Button Widget Here

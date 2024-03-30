@@ -19,7 +19,7 @@ class Shipping {
 
   }
  
-   double getShippingCost(String city, String district, double weight){
+   double getShippingCost(String city, String district, double weight){ //TODO - do these calculations via API
     if(district == "Colombo"){
       //km based cost
        dynamic myCity = shipping_data[district]["cities"].firstWhere((city_el) => city_el["location"] == city);

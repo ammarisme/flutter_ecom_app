@@ -11,7 +11,7 @@ class ReceivePaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: PAGE_BACKGROUND_COLOR,
+      backgroundColor: AppSettings.PAGE_BACKGROUND_COLOR,
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: Colors.black,
@@ -20,7 +20,7 @@ class ReceivePaymentPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: Text(
           'Receive Payment',
-          style: TextStyle(color: darkGrey),
+          style: TextStyle(color: AppSettings.darkGrey),
         ),
         elevation: 0,
       ),

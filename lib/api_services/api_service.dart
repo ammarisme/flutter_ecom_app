@@ -1,29 +1,38 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import '../models/product.dart';
 import '../models/user.dart';
 import '../settings.dart';
 
-class Variables {
-  static String base_url = 'https://catlitter.lk/wp-json/wc/v3';
-  static String store_url = "https://catlitter.lk/wp-json/wc/store/v1/";
-  static String notifylk_url = "https://app.notify.lk/api/v1";
-  static String sms_sender_id = "CATLITTER";
-  static String sms_api_key = 'b3V5qfsJJ4c4GnQJbGJq';
-  static String sms_user_id = '12719' ;
-}
+
 
 //API service
 class ApiService {
-  static String base_url() {
-    return 'https://catlitter.lk/wp-json/wc/v3';
+  // class Variables
+  static String base_url = '';
+  static String store_url = '';
+  static String smsservice_url = "";
+  static String sms_sender_id = "";
+  static String sms_api_key = '';
+  static String sms_user_id = '' ;
+  static String main_carousal_category = "";
+  static String main_carousal_title = "";
+
+  static set_configurations(settings) async {
+    base_url = '${settings["app_data"]["website_url"]}';
+    store_url = '${settings["app_data"]["store_url"]}';
+    smsservice_url = '${settings["app_data"]["smsservice_url"]}';
+    sms_sender_id = '${settings["app_data"]["sms_sender_id"]}';
+    sms_api_key = '${settings["app_data"]["sms_api_key"]}';
+    sms_user_id = '${settings["app_data"]["sms_user_id"]}';
+    main_carousal_category = '${settings["app_data"]["main_carousal_category"]}';
+    main_carousal_title = '${settings["app_data"]["main_carousal_title"]}';
   }
 
   static Future<List<Product>> getProducts(dynamic categoryId) async {
     print('fetching products........');
     try {
-      final Uri url = Uri.parse(base_url() + '/products?category=$categoryId');
+      final Uri url = Uri.parse(base_url + '/products?category=$categoryId');
 
       final response = await http.get(
         url,
@@ -54,7 +63,7 @@ class ApiService {
       final response = await http.get(
           //TODO flutter 2 migration
           Uri(
-            path: base_url(),
+            path: ApiService.base_url+ '/wp-json/wc/v3'+ '/customers',
           ),
           headers: {"Content-Type": "application/json"});
 

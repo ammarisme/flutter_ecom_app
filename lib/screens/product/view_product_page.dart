@@ -146,11 +146,11 @@ void initState() {
 
     return Scaffold(
             key: _scaffoldKey,
-            backgroundColor: PAGE_BACKGROUND_COLOR_2,
+            backgroundColor: StaticAppSettings.PAGE_BACKGROUND_COLOR_2,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0.0,
-              iconTheme: IconThemeData(color: darkGrey),
+              iconTheme: IconThemeData(color: AppSettings.darkGrey),
               actions: <Widget>[
                 IconButton(
                   icon: new SvgPicture.asset(
@@ -164,7 +164,7 @@ void initState() {
               title: Text(
                 'Product',
                 style: const TextStyle(
-                    color: darkGrey,
+                    color: AppSettings.darkGrey,
                     fontWeight: FontWeight.w500,
                     fontFamily: "Montserrat",
                     fontSize: 18.0),

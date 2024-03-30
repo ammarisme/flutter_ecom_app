@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
         child: Text(
           'Login with your mobile number/password.', //TODO: change to mobile number
           style: TextStyle(
-            color: CONTENT_TEXT_COLOR_1,
+            color: StaticAppSettings.CONTENT_TEXT_COLOR_1,
             fontSize: 16.0,
           ),
         ));
@@ -57,8 +57,8 @@ class LoginPage extends StatelessWidget {
           });
         },
         child: Container(
-          width: MediaQuery.of(context).size.width / MAIN_BUTTON_FACTOR,
-          height: MediaQuery.of(context).size.width / MAIN_BUTTON_HEIGHT_FACTOR,
+          width: MediaQuery.of(context).size.width / (StaticAppSettings.MAIN_BUTTON_FACTOR as int),
+          height: MediaQuery.of(context).size.width / (StaticAppSettings.MAIN_BUTTON_HEIGHT_FACTOR as int),
           child: Center(
               child: new Text("Log In",
                   style: const TextStyle(
@@ -67,7 +67,7 @@ class LoginPage extends StatelessWidget {
                       fontStyle: FontStyle.normal,
                       fontSize: 20.0))),
           decoration: BoxDecoration(
-              color: BUTTON_COLOR_1,
+              color: StaticAppSettings.BUTTON_COLOR_1,
               boxShadow: [
                 BoxShadow(
                   color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -94,7 +94,7 @@ class LoginPage extends StatelessWidget {
         padding: EdgeInsets.only(right: 16, left: 16.0, top: 4.0, bottom: 4.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: TEXT_BOX_COLOR,
+          color: StaticAppSettings.TEXT_BOX_COLOR,
         ),
         child:
                          TextField(
@@ -103,7 +103,7 @@ class LoginPage extends StatelessWidget {
                             decoration: InputDecoration(
                               filled: true,
                               border: InputBorder.none,
-                              fillColor: TEXT_BOX_COLOR, 
+                              fillColor: StaticAppSettings.TEXT_BOX_COLOR, 
                               hintText: 'Mobile number',
                               prefixIcon:
                                   Icon(Icons.person), // Icon before the input
@@ -157,7 +157,7 @@ class LoginPage extends StatelessWidget {
           child: Text(
             'Don\'t have an account.?', //TODO: change to mobile number
             style: TextStyle(
-              color: CONTENT_TEXT_COLOR_1,
+              color: StaticAppSettings.CONTENT_TEXT_COLOR_1,
               fontSize: 16.0,
             ),
           )),
@@ -171,7 +171,7 @@ class LoginPage extends StatelessWidget {
               child: Text(
                 'Register Now.', //TODO: change to mobile number
                 style: TextStyle(
-                    color: LINK_TEXT_COLOR_1,
+                    color: StaticAppSettings.LINK_TEXT_COLOR_1,
                     fontSize: 16.0,
                     backgroundColor: Colors.grey.shade100,
                     fontWeight: FontWeight.bold),
@@ -184,7 +184,7 @@ class LoginPage extends StatelessWidget {
           child: Text(
             'Forgot your password.?', //TODO: change to mobile number
             style: TextStyle(
-              color: CONTENT_TEXT_COLOR_1,
+              color: StaticAppSettings.CONTENT_TEXT_COLOR_1,
               fontSize: 16.0,
             ),
           )),
@@ -198,7 +198,7 @@ class LoginPage extends StatelessWidget {
               child: Text(
                 'Reset Password.', //TODO: change to mobile number
                 style: TextStyle(
-                    color: LINK_TEXT_COLOR_1,
+                    color: StaticAppSettings.LINK_TEXT_COLOR_1,
                     fontSize: 16.0,
                     backgroundColor: Colors.grey.shade100,
                     fontWeight: FontWeight.bold),
@@ -207,7 +207,7 @@ class LoginPage extends StatelessWidget {
 
 
     return Scaffold(
-      backgroundColor: PAGE_BACKGROUND_COLOR,
+      backgroundColor: Color.fromARGB(0, 0, 0, 0),
       body: Stack(
         children: <Widget>[
           // Container(
@@ -264,7 +264,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         padding: EdgeInsets.only(right: 16, left: 16.0, top: 4.0, bottom: 4.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: TEXT_BOX_COLOR,
+          color: StaticAppSettings.TEXT_BOX_COLOR,
         ),
         child: TextField(
           controller: widget.passwordController,
@@ -306,7 +306,7 @@ class WelcomeBack extends StatelessWidget {
             return Text(
               'Welcome Back ${snapshot.data},',
               style: TextStyle(
-                  color: CONTENT_TEXT_COLOR_1,
+                  color: StaticAppSettings.CONTENT_TEXT_COLOR_1,
                   fontSize: 34.0,
                   fontWeight: FontWeight.bold,
                   shadows: [
@@ -322,7 +322,7 @@ class WelcomeBack extends StatelessWidget {
             return Text(
               'Welcome',
               style: TextStyle(
-                  color: CONTENT_TEXT_COLOR_1,
+                  color: StaticAppSettings.CONTENT_TEXT_COLOR_1,
                   fontSize: 34.0,
                   fontWeight: FontWeight.bold,
                   shadows: [

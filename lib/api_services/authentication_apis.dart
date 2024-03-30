@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ecommerce_int2/api_services/api_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decode/jwt_decode.dart';
@@ -19,8 +20,7 @@ class AuthenticationAPIs {
     };
 
     final response = await http.post(
-      Uri.parse(
-          'https://catlitter.lk/?rest_route=/simple-jwt-login/v1/auth&username=${username}&password=${password}'), // Replace with your authentication endpoint
+      Uri.parse(ApiService.base_url +'/?rest_route=/simple-jwt-login/v1/auth&username=${username}&password=${password}'), // Replace with your authentication endpoint
       body: json.encode(data),
       headers: {
         'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ class AuthenticationAPIs {
 
     final response = await http.post(
       Uri.parse(
-          'https://catlitter.lk/?rest_route=/simple-jwt-login/v1/auth/revoke'), // Replace with your authentication endpoint
+          ApiService.base_url + '/?rest_route=/simple-jwt-login/v1/auth/revoke'), // Replace with your authentication endpoint
       body: json.encode(data),
       headers: {
         'Content-Type': 'application/json',

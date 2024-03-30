@@ -15,55 +15,6 @@ class TrackingPage extends StatefulWidget {
   _TrackingPageState createState() => _TrackingPageState();
 }
 
-class OrderHistory {
-  final Order order;
-
-  List<Location> locations = [];
-
-  OrderHistory({required this.order});
-
-  List<Location> generate_history() {
-    
-    DateTime ordered_date = DateTime.parse(order.date_created);
-    Location order_placed = Location(
-      sequence: 1,
-        'Order Placed', ordered_date,
-        showHour: false, isHere: true, passed: true);
-
-    DateTime processing_date = DateTime.parse(order.date_created);
-    Location processing = Location(
-      sequence: 2,
-        'Processing your order', processing_date,
-        showHour: false, isHere: this.isProcessing(), passed: this.isCompleted()); //this.isProcessing(),
-
-  DateTime expectedDeliveryDate = ordered_date.add(Duration(days: 2));
-  expectedDeliveryDate = DateTime(
-    expectedDeliveryDate.year,
-    expectedDeliveryDate.month,
-    expectedDeliveryDate.day,
-  );
-
-    Location delivered = Location(
-      sequence: 3,
-      'Delivered',
-      expectedDeliveryDate,
-      showHour: false,
-      isHere: this.isCompleted(),
-      passed: this.isCompleted()
-    );
-
-   
-    this.locations = [order_placed, processing, delivered];
-    return this.locations;
-  }
-  
-  isProcessing() {
-    return (order.status == "processing" || order.status == "completed");
-  }
-  isCompleted() {
-    return (order.status == "completed");
-  }
-}
 
 class _TrackingPageState extends State<TrackingPage> {
   String selected_order = "";
@@ -108,7 +59,7 @@ class _TrackingPageState extends State<TrackingPage> {
                       title: Text(
                         'Track your orders',
                         style: TextStyle(
-                          color: darkGrey,
+                          color: AppSettings.darkGrey,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
@@ -166,7 +117,7 @@ class _TrackingPageState extends State<TrackingPage> {
                                 ),
                                 child: Theme(
                                   data: ThemeData(
-                                      primaryColor: PAGE_BACKGROUND_COLOR,
+                                      primaryColor: AppSettings.PAGE_BACKGROUND_COLOR,
                                       fontFamily: 'Montserrat'),
                                   child: orderHistory == null ? Container() :  Stepper(
 //                          physics: NeverScrollableScrollPhysics(),
@@ -224,7 +175,7 @@ class _TrackingPageState extends State<TrackingPage> {
                       title: Text(
                         'Track your orders',
                         style: TextStyle(
-                          color: darkGrey,
+                          color: AppSettings.darkGrey,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
@@ -259,7 +210,7 @@ class _TrackingPageState extends State<TrackingPage> {
                       title: Text(
                         'Track your orders',
                         style: TextStyle(
-                          color: darkGrey,
+                          color: AppSettings.darkGrey,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
@@ -298,4 +249,58 @@ class Location {
       return DateFormat('d MMMM y').format(date);
     }
   }
+}
+
+class OrderHistory {
+  final Order order;
+
+  List<Location> locations = [];
+
+  OrderHistory({required this.order});
+
+  List<Location> generate_history() {
+    
+    DateTime ordered_date = DateTime.parse(order.date_created);
+    Location order_placed = Location(
+      sequence: 1,
+        'Order Placed', ordered_date,
+        showHour: false, isHere: true, passed: true);
+
+    DateTime processing_date = DateTime.parse(order.date_created);
+    Location processing = Location(
+      sequence: 2,
+        'Processing your order', processing_date,
+        showHour: false, isHere: this.isProcessing(), passed: this.isCompleted()); //this.isProcessing(),
+
+  DateTime expectedDeliveryDate = ordered_date.add(Duration(days: 2));
+  expectedDeliveryDate = DateTime(
+    expectedDeliveryDate.year,
+    expectedDeliveryDate.month,
+    expectedDeliveryDate.day,
+  );
+
+    Location delivered = Location(
+      sequence: 3,
+      'Delivered',
+      expectedDeliveryDate,
+      showHour: false,
+      isHere: this.isCompleted(),
+      passed: this.isCompleted()
+    );
+
+   
+    this.locations = [order_placed, processing, delivered];
+    return this.locations;
+  }
+  
+  isProcessing() {
+    return (order.status == "processing" || order.status == "completed");
+  }
+  isCompleted() {
+    return (order.status == "completed");
+  }
+}
+
+class TrackingPageVM{
+  
 }

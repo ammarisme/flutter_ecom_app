@@ -56,7 +56,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0.0,
-                iconTheme: IconThemeData(color: THEME_COLOR_1),
+                iconTheme: IconThemeData(color: StaticAppSettings.THEME_COLOR_1),
                 actions: <Widget>[
                   // TODO:  IconButton(
                   //   icon: Image.asset('assets/icons/denied_wallet.png'),
@@ -67,7 +67,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 title: Text(
                   'My Cart',
                   style: TextStyle(
-                      color: darkGrey,
+                      color: StaticAppSettings.darkGrey,
                       fontWeight: FontWeight.w500,
                       fontSize: 18.0),
                 ),
@@ -83,8 +83,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       children: <Widget>[
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 20),
-                          height: screenAwareSize(12, context),
-                          color: PAGE_BACKGROUND_COLOR,
+                          height: StaticAppSettings.screenAwareSize(12, context),
+                          color: StaticAppSettings.PAGE_BACKGROUND_COLOR,
                           child:
                           Column(children: [
    Row(
@@ -96,7 +96,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                         .toString()) +
                                     "/=",
                                 style: TextStyle(
-                                    color: CONTENT_TEXT_COLOR_1,
+                                    color: StaticAppSettings.CONTENT_TEXT_COLOR_1,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 12),
                               ),
@@ -105,7 +105,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                     cart.line_items.length.toString() +
                                     ' items)',
                                 style: TextStyle(
-                                    color: CONTENT_TEXT_COLOR_1,
+                                    color: StaticAppSettings.CONTENT_TEXT_COLOR_1,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 12),
                               )
@@ -115,8 +115,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           ],)
                                              ),
                         SizedBox(
-                          height: screenAwareSize(90, context),
-                          width: screenAwareWidth(72, context),
+                          height: StaticAppSettings.screenAwareSize(90, context),
+                          width: StaticAppSettings.screenAwareWidth(72, context),
                           child: Scrollbar(
                             thumbVisibility: true,
                             child: ListView.builder(
@@ -135,7 +135,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           ),
                         ),
                         SizedBox(
-                            height: screenAwareSize(15, context),
+                            height: StaticAppSettings.screenAwareSize(15, context),
                             child:
                                 Container() // display the subtotal, total item count here
                             ),
@@ -167,7 +167,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0.0,
-                iconTheme: IconThemeData(color: THEME_COLOR_1),
+                iconTheme: IconThemeData(color: StaticAppSettings.THEME_COLOR_1),
                 actions: <Widget>[
                   // IconButton(
                   //   icon: Image.asset('assets/icons/denied_wallet.png'),
@@ -178,7 +178,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 title: Text(
                   'My Cart',
                   style: TextStyle(
-                      color: darkGrey,
+                      color: StaticAppSettings.darkGrey,
                       fontWeight: FontWeight.w500,
                       fontSize: 18.0),
                 ),

@@ -49,7 +49,7 @@ class _SendPageState extends State<SendPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Send Amount',
-          style: TextStyle(color: darkGrey),
+          style: TextStyle(color: AppSettings.darkGrey),
         ),
         elevation: 0,
       ),
@@ -63,7 +63,7 @@ class _SendPageState extends State<SendPage> {
                   border: Border(
                       bottom: BorderSide(color: Colors.orange, width: 1))),
               child: TextField(
-                cursorColor: darkGrey,
+                cursorColor: AppSettings.darkGrey,
                 decoration: InputDecoration(
                     hintText: 'Search',
                     contentPadding: EdgeInsets.zero,

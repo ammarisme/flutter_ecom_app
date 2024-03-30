@@ -17,7 +17,7 @@ class RequestAmountPage extends StatelessWidget {
         height: 60,
         // width: width / 1.5,
         decoration: BoxDecoration(
-            gradient: MAIN_BUTTON_GRADIENTS,
+            gradient: AppSettings.MAIN_BUTTON_GRADIENTS,
             boxShadow: [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -45,7 +45,7 @@ class RequestAmountPage extends StatelessWidget {
         height: 60,
         // width: width / 1.5,
         decoration: BoxDecoration(
-            gradient: MAIN_BUTTON_GRADIENTS,
+            gradient:AppSettings.MAIN_BUTTON_GRADIENTS,
             boxShadow: [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -75,7 +75,7 @@ class RequestAmountPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           title: Text(
             'Request Amount',
-            style: TextStyle(color: darkGrey),
+            style: TextStyle(color: AppSettings.darkGrey),
           ),
           elevation: 0,
         ),
@@ -95,7 +95,7 @@ class RequestAmountPage extends StatelessWidget {
                       height: MediaQuery.of(context).size.height / 2.3,
                       padding: const EdgeInsets.all(16.0),
                       width: MediaQuery.of(context).size.width,
-                      color: PAGE_BACKGROUND_COLOR,
+                      color: AppSettings.PAGE_BACKGROUND_COLOR,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[

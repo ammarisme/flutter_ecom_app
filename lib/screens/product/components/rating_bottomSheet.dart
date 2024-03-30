@@ -42,9 +42,9 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                     height: 92,
                     width: 92,
                     decoration: BoxDecoration(
-                        color: PAGE_BACKGROUND_COLOR,
+                        color: AppSettings.PAGE_BACKGROUND_COLOR,
                         shape: BoxShape.circle,
-                        boxShadow: shadow,
+                        boxShadow: AppSettings.shadow,
                         border: Border.all(width: 8.0, color: Colors.white)),
                     child: Image.network(widget.product.image),
                   ),

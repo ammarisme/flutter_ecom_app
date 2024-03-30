@@ -88,7 +88,7 @@ class _AddAddressFormState extends State<AddAddressForm> {
             child: CircularProgressIndicator(), // Or any other loader widget
           )
         : SizedBox(
-            height: screenAwareSize(120, context),
+            height: AppSettings.screenAwareSize(120, context),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,7 +293,7 @@ class _AddAddressFormState extends State<AddAddressForm> {
                                     title: Text('Invalid inputs found'),
                                     content: Container(
                                       width: double.maxFinite,
-                                      height: screenAwareSize(60,
+                                      height: AppSettings.screenAwareSize(60,
                                           context), // Set a fixed height (you can adjust this)
                                       child: ListView.builder(
                                         itemCount: valResult.errors.length,

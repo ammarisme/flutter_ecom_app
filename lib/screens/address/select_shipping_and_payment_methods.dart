@@ -33,13 +33,7 @@ class _SelectShippingMethodPageState extends State<SelectShippingMethodPage> {
       ),
       color: Colors.green.shade300,
     ),
-    // SwipeSelectItem(title: "Card",tag: "cc", icon: Icon(
-    //     Icons.credit_card,
-    //     size: 36, // Adjust the size of the icon
-    //     color: Colors.white,
-    //   ),
-    //   color: Colors.blue
-    //   ),
+   
     SwipeSelectItem(
         title: "Card payment on delivery",
         tag: "card_on_delivery",
@@ -95,7 +89,7 @@ class _SelectShippingMethodPageState extends State<SelectShippingMethodPage> {
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0.0,
-                iconTheme: IconThemeData(color: darkGrey),
+                iconTheme: IconThemeData(color: AppSettings.darkGrey),
                 actions: <Widget>[
                   // IconButton(
                   //   icon: Image.asset('assets/icons/denied_wallet.png'),
@@ -106,7 +100,7 @@ class _SelectShippingMethodPageState extends State<SelectShippingMethodPage> {
                 title: Text(
                   'Shipping & Payments (2/3)',
                   style: TextStyle(
-                      color: darkGrey,
+                      color: AppSettings.darkGrey,
                       fontWeight: FontWeight.w500,
                       fontSize: 18.0),
                 ),
@@ -126,7 +120,7 @@ class _SelectShippingMethodPageState extends State<SelectShippingMethodPage> {
                                   'Select Payment method : ',
                                   style: TextStyle(
                                       fontSize: 14,
-                                      color: darkGrey,
+                                      color: AppSettings.darkGrey,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -155,7 +149,7 @@ class _SelectShippingMethodPageState extends State<SelectShippingMethodPage> {
                                   'Select Shipping method : ',
                                   style: TextStyle(
                                       fontSize: 14,
-                                      color: darkGrey,
+                                      color: AppSettings.darkGrey,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -183,7 +177,7 @@ class _SelectShippingMethodPageState extends State<SelectShippingMethodPage> {
                                     16.0, 0, 16.0, 16.0),
                                 decoration: BoxDecoration(
                                     color: Colors.white,
-                                    boxShadow: shadow,
+                                    boxShadow: AppSettings.shadow,
                                     borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(10),
                                         bottomRight: Radius.circular(10))),
@@ -229,53 +223,9 @@ class _SelectShippingMethodPageState extends State<SelectShippingMethodPage> {
                                                       CrossAxisAlignment.end,
                                                   children: <Widget>[
                                                     Text(
-                                                      '-${NumberFormat('#,##0.00', 'en_US').format((cartNotifier.totalBeforeDiscounts - cartNotifier.totalLineDiscounts))}',
+                                                      '-${NumberFormat('#,##0.00', 'en_US').format((cartNotifier.bill_amount))}',
                                                       textAlign: TextAlign.left,
                                                     ), // Second line with smaller font
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        TableRow(
-                                          children: <Widget>[
-                                            TableCell(
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical:
-                                                        5), // Space between rows
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Text(
-                                                        'Payment method discount (%)')
-                                                    // Second line with smaller font
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            TableCell(
-                                              child: Center(
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: <Widget>[
-                                                    Text(
-                                                      cartNotifier.payment_method_discount_percentage >
-                                                              0
-                                                          ? cartNotifier
-                                                                  .payment_method_discount_percentage
-                                                                  .toString() +
-                                                              "%"
-                                                          : "n/a",
-                                                      textAlign: TextAlign.left,
-                                                    ) // First line
                                                   ],
                                                 ),
                                               ),

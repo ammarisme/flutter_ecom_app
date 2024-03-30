@@ -47,7 +47,7 @@ class _FaqPageState extends State<FaqPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Settings',
-          style: TextStyle(color: darkGrey),
+          style: TextStyle(color: AppSettings.darkGrey),
         ),
         elevation: 0,
       ),

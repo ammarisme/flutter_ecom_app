@@ -27,13 +27,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         image: DecorationImage(
             image: AssetImage('assets/background.jpg'), fit: BoxFit.cover),
       ),
-      foregroundDecoration: BoxDecoration(color: THEME_COLOR_3),
+      foregroundDecoration: BoxDecoration(color: AppSettings.THEME_COLOR_3),
     );
 
     Widget title = Text(
       'Forgot your Password?',
       style: TextStyle(
-          color:TEXT_COLOR_1,
+          color:AppSettings.TEXT_COLOR_1,
           fontSize: 34.0,
           fontWeight: FontWeight.bold,
         ),
@@ -44,7 +44,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Text(
           'Enter your registered mobile number to get the OTP',
           style: TextStyle(
-            color: TEXT_COLOR_1,
+            color: AppSettings.TEXT_COLOR_1,
             fontSize: 16.0,
           ),
         ));
@@ -118,9 +118,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
         child: Container(
           child: Scaffold(
-            backgroundColor: PAGE_BACKGROUND_COLOR,
+            backgroundColor: AppSettings.PAGE_BACKGROUND_COLOR,
             appBar: AppBar(
-              backgroundColor: PAGE_BACKGROUND_COLOR,
+              backgroundColor: AppSettings.PAGE_BACKGROUND_COLOR,
               elevation: 0.0,
             ),
             body: Stack(

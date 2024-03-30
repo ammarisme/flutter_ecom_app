@@ -34,7 +34,7 @@ class _ChangeCountryPageState extends State<ChangeCountryPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Settings',
-          style: TextStyle(color: darkGrey),
+          style: TextStyle(color: AppSettings.darkGrey),
         ),
         elevation: 0,
       ),
@@ -71,7 +71,7 @@ class _ChangeCountryPageState extends State<ChangeCountryPage> {
                             trailing: l == currentCountry
                                 ? Icon(
                                     Icons.check_circle,
-                                    color: PAGE_BACKGROUND_COLOR,
+                                    color: AppSettings.PAGE_BACKGROUND_COLOR,
                                     size: 16,
                                   )
                                 : SizedBox(),

@@ -39,7 +39,7 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          iconTheme: IconThemeData(color: darkGrey),
+          iconTheme: IconThemeData(color: AppSettings.darkGrey),
           actions: <Widget>[
             IconButton(
               icon: Image.asset('assets/icons/denied_wallet.png'),
@@ -50,7 +50,7 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
           title: Text(
             'Checkout',
             style: TextStyle(
-                color: darkGrey,
+                color: AppSettings.darkGrey,
                 fontWeight: FontWeight.w500,
                 fontSize: 18.0),
           ),
@@ -70,7 +70,7 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
                       'Payment',
                       style: TextStyle(
                           fontSize: 20,
-                          color: darkGrey,
+                          color: AppSettings.darkGrey,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -99,7 +99,7 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
                         16.0, 0, 16.0, 16.0),
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        boxShadow: shadow,
+                        boxShadow: AppSettings.shadow,
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10))),

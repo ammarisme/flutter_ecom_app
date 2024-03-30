@@ -22,14 +22,14 @@ class RecommendedList extends StatelessWidget {
                 child: Container(
                   margin: const EdgeInsets.only(left: 16.0, right: 8.0),
                   width: 4,
-                  color: THEME_COLOR_1,
+                  color: AppSettings.THEME_COLOR_1,
                 ),
               ),
               Center(
                   child: Text(
                 'Recommended',
                 style: TextStyle(
-                    color: darkGrey,
+                    color: AppSettings.darkGrey,
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold),
               )),
