@@ -8,6 +8,37 @@ import 'package:http/http.dart' as http;
 import '../settings.dart';
 
 class UserAPIs {
+
+static Future<User?> getCustomerByEmail(String username) async {
+    try {
+      final Uri url = Uri.parse(ApiService.base_url +'/wp-json/wc/v3'+ '/customers?email=${username}');
+
+      final response = await http.get(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Basic " + Settings.TOKEN
+        },
+      );
+
+      if (response.statusCode == 200) {
+        dynamic data = json.decode(response.body);
+        User user = User.fromJson(data[0]);
+
+        final storage = FlutterSecureStorage();
+        await storage.write(key: 'user', value: json.encode(data[0]));
+        return user;
+      } else {
+        print('Failed to fetch user info: ${response.statusCode}');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching user: $e');
+      return null;
+    }
+  }
+
+  
   static Future<User?> getUser(String id) async {
     print('fetching user........');
     try {

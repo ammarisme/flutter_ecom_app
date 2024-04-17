@@ -10,6 +10,12 @@ class Cart {
   String payment_method_title;
   List<CartItem> line_items;
   List<ShippingLine> shipping_lines;
+  double shipping_charges;
+  double total = 0;
+
+  double discount_total = 0;
+  double shipping_total= 0;
+  List<FeeLine> fee_lines = [];
 
   //for internal use
   String nonce;
@@ -40,6 +46,7 @@ class Cart {
     shippingRates,
     required List<String> paymentRequirements,
     required Map<String, dynamic> extensions,
+    required this.shipping_charges
   });
 
   factory Cart.fromJson(Map<String, dynamic> json) {
@@ -93,7 +100,8 @@ items =  json['line_items'] != null
         paymentRequirements:
             List<String>.from(json['payment_requirements'] ?? []),
         nonce: "", //to update the cart
-        extensions: extension
+        extensions: extension,
+        shipping_charges: json['shipping_charges'] ?? 0.0,
         // extensions: json['extensions'] ?? {},
         );
   }
@@ -101,6 +109,10 @@ items =  json['line_items'] != null
   Map<String, dynamic> toJson() {
     List<Map<String, dynamic>> lineItemsJson =
         line_items.map((item) => item.toJson()).toList();
+    List<Map<String, dynamic>> shipping_lines_json =
+    shipping_lines.map((item) => item.toJson()).toList();
+    List<Map<String, dynamic>> fee_lines_json =
+    fee_lines.map((item) => item.toJson()).toList();
 
     return {
       'payment_method': this.payment_method,
@@ -108,9 +120,13 @@ items =  json['line_items'] != null
       'set_paid': this.set_paid,
       'billing': this.billing.toJson(),
       'shipping': this.shipping.toJson(),
+      "shipping_lines" : shipping_lines_json,
       'line_items': lineItemsJson,
       'customer_id': this.user != null ? this.user!.id : "",
-      'shipping_lines': "", //this.shipping_lines,
+      "shipping_total" : this.shipping_total,
+      "discount_total" : this.discount_total,
+      "total" : this.total,
+      "fee_lines" : fee_lines_json
     };
   }
 
@@ -131,6 +147,33 @@ items =  json['line_items'] != null
 }  }
 }
 
+
+class FeeLine
+{ 
+String name;
+String tax_status = 'taxable';
+String tax_class = "";
+double total;
+double total_tax =0;
+List<dynamic> taxes =  [];
+List<dynamic> meta_data =  [];
+
+FeeLine({required this.name,required this.total });
+
+ Map<String, dynamic> toJson() {
+return {
+  'name': this.name,
+  'tax_status': this.tax_status,
+  'tax_class': this.tax_class,
+  "total" : this.total.toString(),
+  "total_tax" : this.total_tax.toString(),
+  "taxes" : [],
+  "meta_data" : []
+};
+}
+}
+
+
 class ShippingLine {
   final String method_id;
   final String method_title;
@@ -140,14 +183,22 @@ class ShippingLine {
       {required this.method_id,
       required this.method_title,
       required this.total});
+
+    Map<String, dynamic> toJson() {
+return {
+  'method_id': this.method_id,
+  'method_title': this.method_title,
+  'total': this.total.toString(),
+};
+}
 }
 
 class Address {
   String firstName;
   String lastName;
   String company;
-  String address1;
-  String address2;
+  String address_1;
+  String address_2;
   String city;
   String state;
   String postcode;
@@ -159,8 +210,8 @@ class Address {
     required this.firstName,
     required this.lastName,
     required this.company,
-    required this.address1,
-    required this.address2,
+    required this.address_1,
+    required this.address_2,
     required this.city,
     required this.state,
     required this.postcode,
@@ -174,8 +225,8 @@ class Address {
       firstName: json['first_name'] ?? '',
       lastName: json['last_name'] ?? '',
       company: json['company'] ?? '',
-      address1: json['address_1'] ?? '',
-      address2: json['address_2'] ?? '',
+      address_1: json['address_1'] ?? '',
+      address_2: json['address_2'] ?? '',
       city: json['city'] ?? '',
       state: json['state'] ?? '',
       postcode: json['postcode'] ?? '',
@@ -187,11 +238,11 @@ class Address {
 
   Map<String, dynamic> toJson() {
     return {
-      'firstName': this.firstName,
-      'lastName': this.lastName,
+      'first_name': this.firstName,
+      'last_name': this.lastName,
       'company': this.company,
-      'address1': this.address1,
-      'address2': this.address2,
+      'address_1': this.address_1,
+      'address_2': this.address_2,
       'city': this.city,
       'state': this.state,
       'postcode': this.postcode,
@@ -367,6 +418,7 @@ class CartItem {
       'currencyPrefix': currencyPrefix,
       'linetotal': salePrice*quantity,
       'linediscount': linediscount,
+      'product':product!=null? product!.toJson() : "0"
     };
   }
 }
@@ -391,3 +443,4 @@ class Info {
   late String address_2;
   late String city;
 }
+

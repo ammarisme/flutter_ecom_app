@@ -47,6 +47,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
       'price': instance.price,
+      'weight' : instance.weight
     };
 
 

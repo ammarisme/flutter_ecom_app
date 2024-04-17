@@ -1,5 +1,4 @@
 import 'package:ecommerce_int2/app_properties.dart';
-import 'package:ecommerce_int2/change_notifiers/mainpage_notifier.dart';
 import 'package:ecommerce_int2/screens/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -108,12 +107,9 @@ class _SplashScreenState extends State<SplashScreen>
     // }
 
     if (_connectivityResult == ConnectivityResult.none) {
-      MainPageNotifier productNotifier =
-          Provider.of<MainPageNotifier>(context, listen: true);
       SettingsAPI.getSettings()
           .then((value)  {
             AppSettings.setSettings(value["app_data"]["theme"]);
-            productNotifier.updateProducts();
             });
     }
   }
@@ -146,7 +142,7 @@ class _SplashScreenState extends State<SplashScreen>
                       Expanded(
                         child: Opacity(
                             opacity: opacity != null ? opacity!.value : 0,
-                            child: new Image.asset('assets/logo.png')),
+                            child: new Image.asset('assets/logo_ss.png')),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -156,7 +152,7 @@ class _SplashScreenState extends State<SplashScreen>
                               children: [
                                 TextSpan(text: 'Powered by '),
                                 TextSpan(
-                                    text: 'TheSellerStack.com',
+                                    text: 'Seller Stack (Pvt) Ltd',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold))
                               ]),

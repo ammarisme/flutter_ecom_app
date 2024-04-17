@@ -1,8 +1,4 @@
 import 'dart:async';
-
-import 'package:ecommerce_int2/change_notifiers/cart_notifiers.dart';
-import 'package:ecommerce_int2/change_notifiers/mainpage_notifier.dart';
-import 'package:ecommerce_int2/change_notifiers/product_notifier.dart';
 import 'package:ecommerce_int2/change_notifiers/user_notifier.dart';
 import 'package:ecommerce_int2/common/utils.dart';
 import 'package:ecommerce_int2/screens/splash_page.dart';
@@ -27,21 +23,14 @@ class MyApp extends StatelessWidget {
      return MultiProvider(
             // Providers for application state management
       providers: [
-        ChangeNotifierProvider<MainPageNotifier>(
-          create: (_) => MainPageNotifier(),
-        ),
+       
         ChangeNotifierProvider<UserNotifier>(
           create: (_) => UserNotifier(),
         ),
-        ChangeNotifierProvider<ProductNotifier>(
-            create: (_) => ProductNotifier(),
-        ),
-        ChangeNotifierProvider<CartNotifier>(
-          create: (_) => CartNotifier(),
-        )
+    
       ],
       child: MaterialApp(
-      title: 'catlitter.lk',
+      title: 'Seller Stack - Customer',
       debugShowCheckedModeBanner: false,
                 // App theme customization
       theme: ThemeData(

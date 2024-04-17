@@ -55,19 +55,18 @@ static Future<APIResponse> calculateOrderInfo(data) async {
     try {
 
     final response = await http.post(
-      Uri.parse('http://erp.thesellerstack.com:3001/test'), // Replace with your authentication endpoint
+      Uri.parse('http://erp.thesellerstack_customercom:3001/shared-functions/execute?function_id=shipping-calculation'), // Replace with your authentication endpoint
       // body: json.encode(data),
       headers: {
         'Content-Type': 'application/json',
       },
-      body:json.encode(data)
+      body:data
     );
-    print(json.encode(data));
   
   
       if (response.statusCode == 201) {
         APIResponse payload = APIResponse();
-        payload.result = json.decode(response.body);;
+        payload.result = json.decode(response.body);
         payload.status = true;
 
         return payload;
