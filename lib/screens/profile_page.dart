@@ -61,8 +61,12 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             IconButton(
-                              icon: Image.asset('assets/icons/truck.png'),
-                              onPressed: () =>
+                              icon: SizedBox(
+                              height: 50.0, // Adjust height as needed
+                              width: 40.0,  // Adjust width as needed
+                              child: Image.asset('assets/icons/truck.png'),
+                            ),
+                            onPressed: () =>
                                   Navigator.of(context).push(
                                       MaterialPageRoute(
                                           builder: (_) => TrackingPage(user: logged_in_user))),
@@ -77,11 +81,33 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             IconButton(
-                              icon: Image.asset('assets/icons/contact_us.png'),
+                              icon: SizedBox(
+                              height: 50.0, // Adjust height as needed
+                              width: 40.0,  // Adjust width as needed
+                              child: Image.asset('assets/icons/contact_us.png'),
+                            ),
+                              
                               onPressed: () {},
                             ),
                             Text(
                               'Support',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            IconButton(
+                            icon: SizedBox(
+                              height: 50.0, // Adjust height as needed
+                              width: 40.0,  // Adjust width as needed
+                              child: Image.asset('assets/icons/pin-removebg-preview.png'),
+                            ),
+                            onPressed: () {},
+                          ),
+                            Text(
+                              'Locate me',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )
                           ],
